@@ -1,0 +1,30 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ctype="Workspace" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="getRank/HtmlOut.cs" ctype="Workbench">
+    <Files>
+      <File FileName="getRank/Main.cs" Line="35" Column="13" />
+      <File FileName="getRank/DataManipulation.cs" Line="75" Column="28" />
+      <File FileName="getRank/HtmlOut.cs" Line="13" Column="3" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="getRank" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches ctype="PinnedWatchStore">
+    <Watch file="getRank/DataManipulation.cs" line="67" offsetX="662" offsetY="768" expression="user" liveUpdate="False" />
+    <Watch file="getRank/DataManipulation.cs" line="20" offsetX="503" offsetY="176" expression="users" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+</Properties>
