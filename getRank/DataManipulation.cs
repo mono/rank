@@ -1,6 +1,7 @@
 //
 // DataManipulation.cs: Handles data recovery and manipulation of git and bugzilla data
 // in order to create commit and resolution rankings.
+// (Doesn't yet handle bugzilla data)
 //
 // Author:
 //   David Mulder (dmulder@novell.com)
@@ -24,6 +25,12 @@ namespace getRank
 			GetDirectoryStructure(directory);
 		}
 		
+		/// <summary>
+		/// Grabs git log data from each sub directory in the current directory.
+		/// </summary>
+		/// <param name="directory">
+		/// The current (parent) directory <see cref="System.String"/>
+		/// </param>
 		private void GetDirectoryStructure(string directory)
 		{
 			string[] folders = Directory.GetDirectories(directory);
@@ -54,6 +61,12 @@ namespace getRank
 			ParseGitData(data);
 		}
 		
+		/// <summary>
+		/// Pulls updates from the current repo.
+		/// </summary>
+		/// <param name="directory">
+		/// Directory of current repo <see cref="System.String"/>
+		/// </param>
 		private void UpdateRepo(string directory)
 		{
 			Process p = new Process();
@@ -209,25 +222,51 @@ namespace getRank
 		internal int code = 0;
 		internal List<string> commits = new List<string>();
 		
+		/// <summary>
+		/// Sets the user information.
+		/// </summary>
+		/// <param name="inEmail">
+		/// User's e-mail address <see cref="System.String"/>
+		/// </param>
+		/// <param name="inName">
+		/// User's name <see cref="System.String"/>
+		/// </param>
 		internal User(string inEmail, string inName)
 		{
 			email.Add(inEmail);
 			name = inName;
 		}
 		
+		/// <summary>
+		/// Adds a commit to the array if the data hasn't already been submitted.
+		/// </summary>
+		/// <param name="commit">
+		/// Commit ID <see cref="System.String"/>
+		/// </param>
+		/// <returns>
+		/// Does not already exist <see cref="System.Boolean"/>
+		/// </returns>
 		internal bool addCommit(string commit)
 		{
 			if (!commits.Contains(commit))
 			{
 				commits.Add(commit);
+				//Does not already exist.
 				return true;
 			}
 			else
 			{
+				//Does already exist.
 				return false;
 			}
 		}
 		
+		/// <summary>
+		/// Add lines of contributed code.
+		/// </summary>
+		/// <param name="value">
+		/// Lines of code to add <see cref="System.Int32"/>
+		/// </param>
 		internal void addCode(int value)
 		{
 			code += value;

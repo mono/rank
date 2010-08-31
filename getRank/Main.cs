@@ -1,3 +1,12 @@
+//
+// Main.cs: Handles creation of a ranking page.
+//
+// Author:
+//   David Mulder (dmulder@novell.com)
+//
+// Copyright (C) 2010 Novell, Inc (www.novell.com)
+// 
+
 using System;
 using System.IO;
 
@@ -55,6 +64,12 @@ namespace getRank
 			}
 		}
 		
+		/// <summary>
+		/// Displays the help file.
+		/// </summary>
+		/// <returns>
+		/// A string help message <see cref="System.String"/>
+		/// </returns>
 		public static string Help()
 		{
 			return @"Usage: getRank [OPTIONS]
