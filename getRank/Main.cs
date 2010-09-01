@@ -17,6 +17,7 @@ namespace getRank
 		public static void Main (string[] args)
 		{
 			string d = Directory.GetCurrentDirectory();
+			string s = "";
 			string f = "index.html";
 			string g = Directory.GetCurrentDirectory();
 			
@@ -34,6 +35,10 @@ namespace getRank
 					case "--dir":
 						d = args[i + 1];
 						break;
+					case "-s":
+					case "--start-date":
+						s = args[i + 1];
+						break;
 					case "-f":
 					case "--file-name":
 						f = args[i + 1];
@@ -45,9 +50,9 @@ namespace getRank
 					}
 				}
 				
-				DataManipulation manipulator = new DataManipulation(g.Replace("\"", "").Replace("'", ""));
+				DataManipulation manipulator = new DataManipulation(g.Replace("\"", "").Replace("'", ""), s.Replace("\"", "").Replace("'", ""));
 				
-				FileInfo info = new FileInfo(d.Replace("\"", "").Replace("'", "") + "/" + f);
+				FileInfo info = new FileInfo(d.Replace("\"", "").Replace("'", "") + "/" + f.Replace("\"", "").Replace("'", ""));
 				StreamWriter writer = info.CreateText();
 				
 				HtmlOut.Template();
@@ -82,6 +87,10 @@ namespace getRank
 	-d, --dir		Specifies the directory to output the html file.
 				If this argument isn't specified, program
 				defaults to current directory.
+
+	-s, --start-date	Specifies the date at which to begin using data.
+				If this argument is not specified, 3 weeks prior to
+				now is assumed.
 
 	-f, --file-name	Specifies the filename for the html output.
 				If this argument isn't specified, program

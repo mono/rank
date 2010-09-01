@@ -20,9 +20,9 @@ namespace getRank
 	{
 		internal List<User> users = new List<User>();
 		
-		public DataManipulation (string directory)
+		public DataManipulation (string directory, string start_date)
 		{
-			GetDirectoryStructure(directory);
+			GetDirectoryStructure(directory, start_date);
 		}
 		
 		/// <summary>
@@ -31,13 +31,13 @@ namespace getRank
 		/// <param name="directory">
 		/// The current (parent) directory <see cref="System.String"/>
 		/// </param>
-		private void GetDirectoryStructure(string directory)
+		private void GetDirectoryStructure(string directory, string start_date)
 		{
 			string[] folders = Directory.GetDirectories(directory);
 			
 			foreach (string dir in folders)
 			{
-				GetGitData(dir);
+				GetGitData(dir, start_date);
 			}
 		}
 		
@@ -47,15 +47,25 @@ namespace getRank
 		/// <returns>
 		/// A string containing the git log <see cref="System.String"/>
 		/// </returns>
-		private void GetGitData(string directory)
+		private void GetGitData(string directory, string start_date)
 		{
+			DateTime start = DateTime.Now;
+			try
+			{
+				start = DateTime.Parse(start_date);
+			}
+			catch
+			{
+				start = DateTime.Now.AddDays(-21);
+			}
+			
 			UpdateRepo(directory);
 			Process p = new Process();
 			p.StartInfo.UseShellExecute = false;
 			p.StartInfo.RedirectStandardOutput = true;
-			p.StartInfo.WorkingDirectory = directory; //"/home/dmulder/gitMono/mono";
+			p.StartInfo.WorkingDirectory = directory;
 			p.StartInfo.FileName = "git";
-			p.StartInfo.Arguments = @"log --shortstat --pretty=format:'%H;%an;%ce' --since=" + DateTime.Now.AddMonths(-6).ToShortDateString();
+			p.StartInfo.Arguments = @"log --shortstat --pretty=format:'%H;%an;%ce' --since=" + start.ToShortDateString();
 			p.Start();
 			string data = p.StandardOutput.ReadToEnd();
 			ParseGitData(data);
