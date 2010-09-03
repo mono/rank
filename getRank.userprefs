@@ -1,10 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ctype="Workspace" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="getRank/HtmlOut.cs" ctype="Workbench">
+  <MonoDevelop.Ide.Workbench ActiveDocument="getRank/DataManipulation.cs" ctype="Workbench">
     <Files>
       <File FileName="getRank/Main.cs" Line="35" Column="13" />
       <File FileName="getRank/DataManipulation.cs" Line="75" Column="28" />
-      <File FileName="getRank/HtmlOut.cs" Line="13" Column="3" />
+      <File FileName="getRank/HtmlOut.cs" Line="13" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
