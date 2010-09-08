@@ -1,0 +1,21 @@
+Meeting minutes for 8/30/2010
+
+- Marc work on styling issues, make site look like go-mono.com (done)
+- replace default gravitar with our own image?
+- David filter out Novell employees?
+- Maybe have icons you can hover over and shows details? (deprecated)
+
+Future 
+- Track comments in code
+- Bug fixing needs to be weighted according to averages
+- Implement filter by project
+- Look at maybe users being able to steal trophies?
+
+
+Meeting minutes for 9/8/2010
+
+- Put meeting minutes into git repository (in progress)
+- Implement time periods that are being focused on
+- show time periods that is being shown as well as previous time periods 
+- Change pop up box to dropdown box with external links to more details
+- Implement new name for webpage and get rid of MonoRanking (done, switched to /bananas) 
