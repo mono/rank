@@ -65,7 +65,7 @@ namespace getRank
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.WorkingDirectory = directory;
 			p.StartInfo.FileName = "git";
-			p.StartInfo.Arguments = @"log --no-merges --shortstat --pretty=format:'%H;%an;%ce' --since=" + start.ToShortDateString();
+			p.StartInfo.Arguments = @"log --no-merges --cherry-pick --shortstat --pretty=format:'%H;%an;%ce' --since=" + start.ToShortDateString();
 			p.Start();
 			string data = p.StandardOutput.ReadToEnd();
 			ParseGitData(data);
@@ -101,10 +101,10 @@ namespace getRank
 			chars[1] = '\n';
 			string[] sdata = data.Split(chars);
 			User previousUser = new User("", "");
-			bool prevNew = true;
+			//bool prevNew = true;
 			foreach (string line in sdata)
 			{
-				if (line.Contains("files changed") && prevNew)
+				if (line.Contains("files changed"))
 				{
 					int startIns = line.IndexOf(",") + 1;
 					string insertions = line.Substring(startIns, line.IndexOf("insertions") - startIns);
@@ -115,14 +115,14 @@ namespace getRank
 					string[] user = line.Split(';');
 					if (UserExists(user[2], user[1]))
 					{
-						prevNew = iUser(user[2]).addCommit(user[0]);
+						iUser(user[2]).addCommit(user[0]);
 						previousUser = iUser(user[2]);
 					}
 					else
 					{
 						User aUser = new User(user[2], user[1]);
 						users.Add(aUser);
-						prevNew = aUser.addCommit(user[0]);
+						aUser.addCommit(user[0]);
 						previousUser = aUser;
 					}
 				}
@@ -253,22 +253,9 @@ namespace getRank
 		/// <param name="commit">
 		/// Commit ID <see cref="System.String"/>
 		/// </param>
-		/// <returns>
-		/// Does not already exist <see cref="System.Boolean"/>
-		/// </returns>
-		internal bool addCommit(string commit)
+		internal void addCommit(string commit)
 		{
-			if (!commits.Contains(commit))
-			{
-				commits.Add(commit);
-				//Does not already exist.
-				return true;
-			}
-			else
-			{
-				//Does already exist.
-				return false;
-			}
+			commits.Add(commit);
 		}
 		
 		/// <summary>

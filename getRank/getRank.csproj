@@ -21,7 +21,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
-    <Commandlineparameters>--git-dir "/home/dmulder/gitMono" --dir "/home/dmulder"</Commandlineparameters>
+    <Commandlineparameters>--git-dir "/home/dmulder/mono" --dir "/home/dmulder"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>

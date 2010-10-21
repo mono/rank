@@ -3,7 +3,7 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="getRank/DataManipulation.cs" ctype="Workbench">
     <Files>
       <File FileName="getRank/Main.cs" Line="35" Column="13" />
-      <File FileName="getRank/DataManipulation.cs" Line="75" Column="28" />
+      <File FileName="getRank/DataManipulation.cs" Line="263" Column="1" />
       <File FileName="getRank/HtmlOut.cs" Line="13" Column="1" />
     </Files>
     <Pads>
@@ -21,7 +21,10 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/dmulder/rank/getRank/DataManipulation.cs" line="263" />
+      <Breakpoint file="/home/dmulder/rank/getRank/DataManipulation.cs" line="270" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches ctype="PinnedWatchStore">
     <Watch file="getRank/DataManipulation.cs" line="67" offsetX="662" offsetY="768" expression="user" liveUpdate="False" />
