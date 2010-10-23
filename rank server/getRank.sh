@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec mono getRank.exe "$@"
+exec mono /home/rupert/rank/getRank/bin/Release/getRank.exe "$@"
