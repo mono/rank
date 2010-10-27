@@ -102,14 +102,14 @@ namespace getRank
 			chars[1] = '\n';
 			string[] sdata = data.Split(chars);
 			User previousUser = new User("", "");
-			//bool prevNew = true;
+
 			foreach (string line in sdata)
 			{
 				if (line.Contains("files changed"))
 				{
-					int startIns = line.IndexOf(",") + 1;
-					string insertions = line.Substring(startIns, line.IndexOf("insertions") - startIns);
-					previousUser.addCode(int.Parse(insertions.Trim()), project);
+					string[] changes = line.Split(',');
+					previousUser.CodeAdded(int.Parse(changes[1].Trim().Split(' ')[0]), project);
+					previousUser.CodeRemoved(int.Parse(changes[2].Trim().Split(' ')[0]), project);
 				}
 				else if (line.Trim() != "")
 				{
@@ -212,9 +212,9 @@ namespace getRank
 				User highRanking = null;
 				foreach (User user in users)
 				{
-					if (user.Code() > code)
+					if (user.CodeAdded() > code)
 					{
-						code = user.Code();
+						code = user.CodeAdded();
 						highRanking = user;
 					}
 				}
@@ -264,17 +264,41 @@ namespace getRank
 		/// <param name="value">
 		/// Lines of code to add <see cref="System.Int32"/>
 		/// </param>
-		internal void addCode(int value, string project)
+		internal void CodeAdded(int value, string project)
 		{
-			getProject(project).addCode(value);
+			getProject(project).CodeAdded(value);
 		}
 		
-		internal int Code()
+		/// <summary>
+		/// Gets the amount of code added.
+		/// </summary>
+		internal int CodeAdded()
 		{
 			int code = 0;
 			foreach (Project proj in projects)
 			{
-				code += proj.Code();
+				code += proj.CodeAdded();
+			}
+			return code;
+		}
+		
+		/// <summary>
+		/// Add lines of removed code.
+		/// </summary>
+		internal void CodeRemoved(int value, string project)
+		{
+			getProject(project).CodeRemoved(value);
+		}
+		
+		/// <summary>
+		/// Gets the amount of code removed.
+		/// </summary>
+		internal int CodeRemoved()
+		{
+			int code = 0;
+			foreach (Project proj in projects)
+			{
+				code += proj.CodeRemoved();
 			}
 			return code;
 		}
@@ -300,7 +324,8 @@ namespace getRank
 	internal class Project
 	{
 		internal string name;
-		private int code = 0;
+		private int codeAdded = 0;
+		private int codeRemoved = 0;
 		private List<string> commits = new List<string>();
 		
 		/// <summary>
@@ -331,14 +356,33 @@ namespace getRank
 		/// <param name="value">
 		/// Lines of code to add <see cref="System.Int32"/>
 		/// </param>
-		internal void addCode(int value)
+		internal void CodeAdded(int value)
 		{
-			code += value;
+			codeAdded += value;
 		}
 		
-		internal int Code()
+		/// <summary>
+		/// Get the amount of code added.
+		/// </summary>
+		internal int CodeAdded()
 		{
-			return code;	
+			return codeAdded;	
+		}
+		
+		/// <summary>
+		/// Add lines of removed code.
+		/// </summary>
+		internal void CodeRemoved(int value)
+		{
+			codeRemoved += value;
+		}
+		
+		/// <summary>
+		/// Get the amount of code removed.
+		/// </summary>
+		internal int CodeRemoved()
+		{
+			return codeRemoved;	
 		}
 	}
 }

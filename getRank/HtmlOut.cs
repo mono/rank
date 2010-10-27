@@ -75,12 +75,12 @@ namespace getRank
 		/// </returns>
 		internal static string UserRank(User user, int rank)//string name, string email, int rank, int code)
 		{
-			string data = userHeader.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.Code().ToString()).Replace("<!-- email -->", user.email[0]);
+			string data = userHeader.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.CodeAdded().ToString()).Replace("<!-- email -->", user.email[0]);
 			foreach (Project proj in user.projects)
 			{
-				data += projData.Replace("<!-- Project -->", proj.name).Replace("<!-- projCode -->", proj.Code().ToString());
+				data += projData.Replace("<!-- Project -->", proj.name).Replace("<!-- projCode -->", "+" + proj.CodeAdded().ToString() + " -" + proj.CodeRemoved().ToString());
 			}
-			data += userFooter.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.Code().ToString()).Replace("<!-- email -->", user.email[0]);
+			data += userFooter.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.CodeAdded().ToString()).Replace("<!-- email -->", user.email[0]);
 			return data;
 		}
 		
