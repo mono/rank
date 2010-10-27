@@ -61,9 +61,12 @@ namespace getRank
 				User[] ranks = manipulator.UserRanks();
 				for (int i = 0; i <= ranks.Length - 1; i++)
 				{
-					writer.Write(HtmlOut.UserRank(ranks[i].name, ranks[i].email.GetRange(0, 1)[0], i + 1, ranks[i].code));
+					if (ranks[i] != null)
+					{
+						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));//ranks[i].name, ranks[i].email.GetRange(0, 1)[0], i + 1, ranks[i].Code()));
+					}
 				}
-			
+				
 				writer.Write(HtmlOut.footer);
 				writer.Close();
 			}

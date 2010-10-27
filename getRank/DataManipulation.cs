@@ -37,7 +37,8 @@ namespace getRank
 			
 			foreach (string dir in folders)
 			{
-				GetGitData(dir, start_date);
+				string[] dir_struc = dir.Split('/');
+				GetGitData(dir, start_date, dir_struc[dir_struc.Length - 1]);
 			}
 		}
 		
@@ -47,7 +48,7 @@ namespace getRank
 		/// <returns>
 		/// A string containing the git log <see cref="System.String"/>
 		/// </returns>
-		private void GetGitData(string directory, string start_date)
+		private void GetGitData(string directory, string start_date, string project)
 		{
 			DateTime start = DateTime.Now;
 			try
@@ -68,7 +69,7 @@ namespace getRank
 			p.StartInfo.Arguments = @"log --no-merges --cherry-pick --shortstat --pretty=format:'%H;%an;%ce' --since=" + start.ToShortDateString();
 			p.Start();
 			string data = p.StandardOutput.ReadToEnd();
-			ParseGitData(data);
+			ParseGitData(data, project);
 		}
 		
 		/// <summary>
@@ -93,7 +94,7 @@ namespace getRank
 		/// <param name="data">
 		/// git data<see cref="System.String"/>
 		/// </param>
-		private void ParseGitData(string data)
+		private void ParseGitData(string data, string project)
 		{
 			//user[0] is the commit #, user[1] is the name, and user[2] is email.
 			char[] chars = new char[2];
@@ -108,21 +109,21 @@ namespace getRank
 				{
 					int startIns = line.IndexOf(",") + 1;
 					string insertions = line.Substring(startIns, line.IndexOf("insertions") - startIns);
-					previousUser.addCode(int.Parse(insertions.Trim()));
+					previousUser.addCode(int.Parse(insertions.Trim()), project);
 				}
 				else if (line.Trim() != "")
 				{
 					string[] user = line.Split(';');
 					if (UserExists(user[2], user[1]))
 					{
-						iUser(user[2]).addCommit(user[0]);
+						iUser(user[2]).addCommit(user[0], project);
 						previousUser = iUser(user[2]);
 					}
 					else
 					{
 						User aUser = new User(user[2], user[1]);
 						users.Add(aUser);
-						aUser.addCommit(user[0]);
+						aUser.addCommit(user[0], project);
 						previousUser = aUser;
 					}
 				}
@@ -211,9 +212,9 @@ namespace getRank
 				User highRanking = null;
 				foreach (User user in users)
 				{
-					if (user.code > code)
+					if (user.Code() > code)
 					{
-						code = user.code;
+						code = user.Code();
 						highRanking = user;
 					}
 				}
@@ -229,8 +230,7 @@ namespace getRank
 	{
 		internal List<string> email = new List<string>();
 		internal string name {get; set;}
-		internal int code = 0;
-		internal List<string> commits = new List<string>();
+		internal List<Project> projects = new List<Project>();
 		
 		/// <summary>
 		/// Sets the user information.
@@ -253,6 +253,73 @@ namespace getRank
 		/// <param name="commit">
 		/// Commit ID <see cref="System.String"/>
 		/// </param>
+		internal void addCommit(string commit, string project)
+		{
+			getProject(project).addCommit(commit);
+		}
+		
+		/// <summary>
+		/// Add lines of contributed code.
+		/// </summary>
+		/// <param name="value">
+		/// Lines of code to add <see cref="System.Int32"/>
+		/// </param>
+		internal void addCode(int value, string project)
+		{
+			getProject(project).addCode(value);
+		}
+		
+		internal int Code()
+		{
+			int code = 0;
+			foreach (Project proj in projects)
+			{
+				code += proj.Code();
+			}
+			return code;
+		}
+		
+		/// <summary>
+		/// Find the Project, else create the project.
+		/// </summary>
+		internal Project getProject(string project)
+		{
+			foreach (Project proj in projects)
+			{
+				if (proj.name == project)
+				{
+					return proj;
+				}
+			}
+			Project temp = new Project(project);
+			projects.Add(temp);
+			return temp;
+		}
+	}
+	
+	internal class Project
+	{
+		internal string name;
+		private int code = 0;
+		private List<string> commits = new List<string>();
+		
+		/// <summary>
+		/// Constructor sets the name of the project.
+		/// </summary>
+		/// <param name="project">
+		/// The Project name <see cref="System.String"/>
+		/// </param>
+		internal Project(string project)
+		{
+			name = project;
+		}
+		
+		/// <summary>
+		/// Adds a commit to the array if the data hasn't already been submitted.
+		/// </summary>
+		/// <param name="commit">
+		/// Commit ID <see cref="System.String"/>
+		/// </param>
 		internal void addCommit(string commit)
 		{
 			commits.Add(commit);
@@ -267,6 +334,11 @@ namespace getRank
 		internal void addCode(int value)
 		{
 			code += value;
+		}
+		
+		internal int Code()
+		{
+			return code;	
 		}
 	}
 }

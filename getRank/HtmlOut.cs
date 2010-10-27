@@ -15,10 +15,13 @@ namespace getRank
 {
 	public class HtmlOut
 	{
-		private static string dir = getDir();
+		private static string DIR = getDir();
 		internal static string header = "";
-		internal static string user = "";
+		internal static string userData = "";
 		internal static string footer = "";
+		internal static string userHeader = "";
+		internal static string projData = "";
+		internal static string userFooter = "";
 		
 		/// <summary>
 		/// Gets the directory where the template is located.
@@ -36,7 +39,7 @@ namespace getRank
 		/// </summary>
 		internal static void Template()
 		{
-			StreamReader read = File.OpenText(dir + "template.html");
+			StreamReader read = File.OpenText(DIR + "template.html");
 			string template = "";
 			while (!read.EndOfStream)
 			{
@@ -47,8 +50,9 @@ namespace getRank
 			int end_user = template.IndexOf("<!-- End User -->");
 			int aft_end_user = end_user + 17;
 			header = template.Substring(0, front_user);
-			user = template.Substring(front_user + 19, end_user - aft_front_user);
+			userData = template.Substring(front_user + 19, end_user - aft_front_user);
 			footer = template.Substring(aft_end_user, template.Length - aft_end_user);
+			UserTemplate(userData);
 		}
 		
 		/// <summary>
@@ -69,10 +73,26 @@ namespace getRank
 		/// <returns>
 		/// The html string representing the user <see cref="System.String"/>
 		/// </returns>
-		internal static string UserRank(string name, string email, int rank, int code)
+		internal static string UserRank(User user, int rank)//string name, string email, int rank, int code)
 		{
-			string userData = user.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", name).Replace("<!-- code -->", code.ToString()).Replace("<!-- email -->", email);
-			return userData;
+			string data = userHeader.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.Code().ToString()).Replace("<!-- email -->", user.email[0]);
+			foreach (Project proj in user.projects)
+			{
+				data += projData.Replace("<!-- Project -->", proj.name).Replace("<!-- projCode -->", proj.Code().ToString());
+			}
+			data += userFooter.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.Code().ToString()).Replace("<!-- email -->", user.email[0]);
+			return data;
+		}
+		
+		private static void UserTemplate(string template)
+		{
+			int front_user = template.IndexOf("<!-- Data -->");
+			int aft_front_user = front_user + 13;
+			int end_user = template.IndexOf("<!-- End Data -->");
+			int aft_end_user = end_user + 17;
+			userHeader = template.Substring(0, front_user);
+			projData = template.Substring(front_user + 13, end_user - aft_front_user);
+			userFooter = template.Substring(aft_end_user, template.Length - aft_end_user);
 		}
 	}
 }
