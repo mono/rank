@@ -81,7 +81,6 @@ namespace getRank
 				data += projData.Replace("<!-- Project -->", proj.name).Replace("<!-- projCode -->", "+" + proj.CodeAdded().ToString() + " -" + proj.CodeRemoved().ToString());
 			}
 			data += userFooter.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.CodeAdded().ToString()).Replace("<!-- email -->", user.email[0]);
-			data += "<p>Updated " + DateTime.Now.ToString() + "</p>";
 			return data;
 		}
 		

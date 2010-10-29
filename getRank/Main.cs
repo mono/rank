@@ -66,7 +66,7 @@ namespace getRank
 						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));//ranks[i].name, ranks[i].email.GetRange(0, 1)[0], i + 1, ranks[i].Code()));
 					}
 				}
-				
+				writer.Write("<p>Updated " + DateTime.Now.ToString() + "</p>");
 				writer.Write(HtmlOut.footer);
 				writer.Close();
 			}
