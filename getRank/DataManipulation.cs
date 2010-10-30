@@ -249,11 +249,14 @@ namespace getRank
 		
 		internal int Score()
 		{
-			if (CodeRemoved() > CodeAdded())
+			int score = CodeAdded() - CodeRemoved();
+			
+			if (score < 0)
 			{
-				return CodeRemoved() - CodeAdded();
+				score = score * -1;
 			}
-			return CodeAdded() - CodeRemoved();
+			
+			return score;
 		}
 		
 		/// <summary>
