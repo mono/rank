@@ -251,7 +251,7 @@ namespace getRank
 		{
 			if (CodeRemoved() > CodeAdded())
 			{
-				return CodeAdded();
+				return CodeRemoved() - CodeAdded();
 			}
 			return CodeAdded() - CodeRemoved();
 		}
