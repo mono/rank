@@ -73,15 +73,26 @@ namespace getRank
 		/// <returns>
 		/// The html string representing the user <see cref="System.String"/>
 		/// </returns>
-		internal static string UserRank(User user, int rank)//string name, string email, int rank, int code)
+		internal static string UserRank(User user, int rank)
 		{
-			string data = userHeader.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.CodeAdded().ToString()).Replace("<!-- email -->", user.email[0]);
+			string data = ReplaceKeywords(userHeader, user, rank);
 			foreach (Project proj in user.projects)
 			{
-				data += projData.Replace("<!-- Project -->", proj.name).Replace("<!-- projCode -->", "+" + proj.CodeAdded().ToString() + " -" + proj.CodeRemoved().ToString());
+				data += ReplaceKeywords(projData, user, rank)
+					.Replace("<!-- Project -->", proj.name)
+					.Replace("<!-- projCode -->", "+" + proj.CodeAdded().ToString() + " -" + proj.CodeRemoved().ToString());
 			}
-			data += userFooter.Replace("<!-- rank -->", rank.ToString()).Replace("<!-- name -->", user.name).Replace("<!-- code -->", user.CodeAdded().ToString()).Replace("<!-- email -->", user.email[0]);
+			data += ReplaceKeywords(userFooter, user, rank);
 			return data;
+		}
+		
+		private static string ReplaceKeywords(string html, User user, int rank)
+		{
+			return html.Replace("<!-- rank -->", rank.ToString())
+				.Replace("<!-- name -->", user.name)
+				.Replace("<!-- code -->", user.CodeAdded().ToString())
+				.Replace("<!-- email -->", user.email[0])
+				.Replace("<!-- score -->", user.Score().ToString());
 		}
 		
 		private static void UserTemplate(string template)

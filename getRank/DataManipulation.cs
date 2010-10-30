@@ -247,6 +247,11 @@ namespace getRank
 			name = inName;
 		}
 		
+		internal int Score()
+		{
+			return CodeAdded() + (CodeRemoved() / 2);
+		}
+		
 		/// <summary>
 		/// Adds a commit to the array if the data hasn't already been submitted.
 		/// </summary>
