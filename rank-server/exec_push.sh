@@ -1,6 +1,6 @@
-#!/bin/sh
+#/bin/sh
 GIT_DIR="/home/rupert/monogit"
-OUTPUT_DIR="/home/rupert/rank/rank server/Output"
+OUTPUT_DIR="/home/rupert/rank/rank-server/Output"
 GET_RANK_DIR="/home/rupert/rank/getRank/bin/Release/"
 
 echo "  ***  Running getRank.exe"
