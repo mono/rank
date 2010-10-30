@@ -208,13 +208,13 @@ namespace getRank
 
 			for (int i = 0; i <= STOP; i++)
 			{
-				int code = 0;
+				int score = 0;
 				User highRanking = null;
 				foreach (User user in users)
 				{
-					if (user.CodeAdded() > code)
+					if (user.Score() > score)
 					{
-						code = user.CodeAdded();
+						score = user.Score();
 						highRanking = user;
 					}
 				}
@@ -249,7 +249,11 @@ namespace getRank
 		
 		internal int Score()
 		{
-			return CodeAdded() + (CodeRemoved() / 2);
+			if (CodeRemoved() > CodeAdded())
+			{
+				return CodeAdded();
+			}
+			return CodeAdded() - CodeRemoved();
 		}
 		
 		/// <summary>
