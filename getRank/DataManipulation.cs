@@ -60,7 +60,7 @@ namespace getRank
 				start = DateTime.Now.AddDays(-21);
 			}
 			
-			UpdateRepo(directory);
+			//UpdateRepo(directory);
 			Process p = new Process();
 			p.StartInfo.UseShellExecute = false;
 			p.StartInfo.RedirectStandardOutput = true;
@@ -108,22 +108,32 @@ namespace getRank
 				if (line.Contains("files changed"))
 				{
 					string[] changes = line.Split(',');
-					previousUser.CodeAdded(int.Parse(changes[1].Trim().Split(' ')[0]), project);
-					previousUser.CodeRemoved(int.Parse(changes[2].Trim().Split(' ')[0]), project);
+					int added = int.Parse(changes[1].Trim().Split(' ')[0]);
+					int removed = int.Parse(changes[2].Trim().Split(' ')[0]);
+					previousUser.CodeAdded(added, project);
+					previousUser.CodeRemoved(removed, project);
+					if (added > removed)
+					{
+						previousUser.CodeCurved(added - removed, project);
+					}
+					else if (removed > added)
+					{
+						previousUser.CodeCurved(removed - added, project);
+					}
 				}
 				else if (line.Trim() != "")
 				{
 					string[] user = line.Split(';');
 					if (UserExists(user[2], user[1]))
 					{
-						iUser(user[2]).addCommit(user[0], project);
+						iUser(user[2]).AddCommit(user[0], project);
 						previousUser = iUser(user[2]);
 					}
 					else
 					{
 						User aUser = new User(user[2], user[1]);
 						users.Add(aUser);
-						aUser.addCommit(user[0], project);
+						aUser.AddCommit(user[0], project);
 						previousUser = aUser;
 					}
 				}
@@ -171,11 +181,13 @@ namespace getRank
 			bool exists = false;
 			foreach (User user in users)
 			{
-				if (user.email.Contains(email))
+				string new_name = name.Split()[0] + name.Split()[name.Split().Length - 1];
+				string existing_name = user.name.Split()[0] + user.name.Split()[user.name.Split().Length - 1];
+				if (user.email.Contains(email) && existing_name == new_name)
 				{
 					exists = true;
 				}
-				else if(user.name == name)
+				else if(existing_name == new_name)
 				{
 					exists = true;
 					user.email.Add(email);
@@ -247,6 +259,9 @@ namespace getRank
 			name = inName;
 		}
 		
+		/// <summary>
+		/// Returns a cumulative score based on contribution to Mono.
+		/// </summary>
 		internal int Score()
 		{
 			int score = CodeAdded() - CodeRemoved();
@@ -255,8 +270,24 @@ namespace getRank
 			{
 				score = score * -1;
 			}
+			//Console.WriteLine(name + "\t" + "Curved code: " + CodeCurved() + "\t" + "Added - Removed: " + score);
+			Console.WriteLine(name + "\t\t" + "Added: " + CodeAdded() + "\t" + "Removed: " + CodeRemoved());
 			
+			score = (score * CommitCount()) / 100;
 			return score;
+		}
+		
+		/// <summary>
+		/// Total Number of commits sent to Mono.
+		/// </summary>
+		internal int CommitCount()
+		{
+			int count = 0;
+			foreach (Project proj in projects)
+			{
+				count += proj.CommitCount();
+			}
+			return count;
 		}
 		
 		/// <summary>
@@ -265,9 +296,24 @@ namespace getRank
 		/// <param name="commit">
 		/// Commit ID <see cref="System.String"/>
 		/// </param>
-		internal void addCommit(string commit, string project)
+		internal void AddCommit(string commit, string project)
 		{
-			getProject(project).addCommit(commit);
+			GetProject(project).AddCommit(commit);
+		}
+		
+		internal void CodeCurved(int value, string project)
+		{
+			GetProject(project).CodeCurved = value;
+		}
+		
+		internal int CodeCurved()
+		{
+			int code = 0;
+			foreach (Project proj in projects)
+			{
+				code += proj.CodeCurved;
+			}
+			return code;
 		}
 		
 		/// <summary>
@@ -278,7 +324,7 @@ namespace getRank
 		/// </param>
 		internal void CodeAdded(int value, string project)
 		{
-			getProject(project).CodeAdded(value);
+			GetProject(project).CodeAdded = value;
 		}
 		
 		/// <summary>
@@ -289,7 +335,7 @@ namespace getRank
 			int code = 0;
 			foreach (Project proj in projects)
 			{
-				code += proj.CodeAdded();
+				code += proj.CodeAdded;
 			}
 			return code;
 		}
@@ -299,7 +345,7 @@ namespace getRank
 		/// </summary>
 		internal void CodeRemoved(int value, string project)
 		{
-			getProject(project).CodeRemoved(value);
+			GetProject(project).CodeRemoved = value;
 		}
 		
 		/// <summary>
@@ -310,7 +356,7 @@ namespace getRank
 			int code = 0;
 			foreach (Project proj in projects)
 			{
-				code += proj.CodeRemoved();
+				code += proj.CodeRemoved;
 			}
 			return code;
 		}
@@ -318,7 +364,7 @@ namespace getRank
 		/// <summary>
 		/// Find the Project, else create the project.
 		/// </summary>
-		internal Project getProject(string project)
+		internal Project GetProject(string project)
 		{
 			foreach (Project proj in projects)
 			{
@@ -336,9 +382,55 @@ namespace getRank
 	internal class Project
 	{
 		internal string name;
+		private int codeCurved = 0;
 		private int codeAdded = 0;
 		private int codeRemoved = 0;
 		private List<string> commits = new List<string>();
+		
+		/// <summary>
+		/// Represents a code curve based on individual commits.
+		/// </summary>
+		internal int CodeCurved
+		{
+			get
+			{
+				return codeCurved;
+			}
+			set
+			{
+				codeCurved += value;
+			}
+		}
+		
+		/// <summary>
+		/// Represents the amount of code contributed to Mono.
+		/// </summary>
+		internal int CodeAdded
+		{
+			get
+			{
+				return codeAdded;
+			}
+			set
+			{
+				codeAdded += value;
+			}
+		}
+		
+		/// <summary>
+		/// Represents the amount of code removed from Mono.
+		/// </summary>
+		internal int CodeRemoved
+		{
+			get
+			{
+				return codeRemoved;	
+			}
+			set
+			{
+				codeRemoved += value;
+			}
+		}
 		
 		/// <summary>
 		/// Constructor sets the name of the project.
@@ -357,44 +449,17 @@ namespace getRank
 		/// <param name="commit">
 		/// Commit ID <see cref="System.String"/>
 		/// </param>
-		internal void addCommit(string commit)
+		internal void AddCommit(string commit)
 		{
 			commits.Add(commit);
 		}
 		
 		/// <summary>
-		/// Add lines of contributed code.
+		/// Number of commits.
 		/// </summary>
-		/// <param name="value">
-		/// Lines of code to add <see cref="System.Int32"/>
-		/// </param>
-		internal void CodeAdded(int value)
+		internal int CommitCount()
 		{
-			codeAdded += value;
-		}
-		
-		/// <summary>
-		/// Get the amount of code added.
-		/// </summary>
-		internal int CodeAdded()
-		{
-			return codeAdded;	
-		}
-		
-		/// <summary>
-		/// Add lines of removed code.
-		/// </summary>
-		internal void CodeRemoved(int value)
-		{
-			codeRemoved += value;
-		}
-		
-		/// <summary>
-		/// Get the amount of code removed.
-		/// </summary>
-		internal int CodeRemoved()
-		{
-			return codeRemoved;	
+			return commits.Count;
 		}
 	}
 }

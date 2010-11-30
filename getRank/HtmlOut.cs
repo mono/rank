@@ -15,23 +15,31 @@ namespace getRank
 {
 	public class HtmlOut
 	{
-		private static string DIR = getDir();
+		private static string directory = "";
 		internal static string header = "";
-		internal static string userData = "";
+		private static string userData = "";
 		internal static string footer = "";
-		internal static string userHeader = "";
-		internal static string projData = "";
-		internal static string userFooter = "";
-		
-		/// <summary>
-		/// Gets the directory where the template is located.
-		/// </summary>
-		/// <returns>
-		/// Template directory <see cref="System.String"/>
-		/// </returns>
-		private static string getDir()
+		private static string userHeader = "";
+		private static string projData = "";
+		private static string userFooter = "";
+
+		internal static string TemplateDirectory
 		{
-			return Directory.GetCurrentDirectory() + "/htdocs/";
+			get
+			{
+				return directory;
+			}
+			set
+			{
+				if (value == "")
+				{
+					directory = Directory.GetCurrentDirectory() + "/htdocs/";
+				}
+				else
+				{
+					directory = value;
+				}
+			}
 		}
 		
 		/// <summary>
@@ -39,7 +47,7 @@ namespace getRank
 		/// </summary>
 		internal static void Template()
 		{
-			StreamReader read = File.OpenText(DIR + "template.html");
+			StreamReader read = File.OpenText(directory + "/template.html");
 			string template = "";
 			while (!read.EndOfStream)
 			{
@@ -80,7 +88,7 @@ namespace getRank
 			{
 				data += ReplaceKeywords(projData, user, rank)
 					.Replace("<!-- Project -->", proj.name)
-					.Replace("<!-- projCode -->", "+" + proj.CodeAdded().ToString() + " -" + proj.CodeRemoved().ToString());
+					.Replace("<!-- projCode -->", "+" + proj.CodeAdded.ToString() + " -" + proj.CodeRemoved.ToString());
 			}
 			data += ReplaceKeywords(userFooter, user, rank);
 			return data;
@@ -92,7 +100,8 @@ namespace getRank
 				.Replace("<!-- name -->", user.name)
 				.Replace("<!-- code -->", user.CodeAdded().ToString())
 				.Replace("<!-- email -->", user.email[0])
-				.Replace("<!-- score -->", user.Score().ToString());
+				.Replace("<!-- score -->", user.Score().ToString())
+				.Replace("<!-- commits -->", user.CommitCount().ToString());
 		}
 		
 		private static void UserTemplate(string template)

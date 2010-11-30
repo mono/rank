@@ -2,9 +2,10 @@
 GIT_DIR="/home/rupert/monogit"
 OUTPUT_DIR="/home/rupert/rank/rank-server/Output"
 GET_RANK_DIR="/home/rupert/rank/getRank/bin/Release/"
+TEMP_DIR="/home/rupert/rank/rank-server/htdocs/"
 
 echo "  ***  Running getRank.exe"
-mono "${GET_RANK_DIR}"/getRank.exe -d "${OUTPUT_DIR}" -g "${GIT_DIR}"
+mono "${GET_RANK_DIR}"/getRank.exe -d "${OUTPUT_DIR}" -g "${GIT_DIR}" -t "${TEMP_DIR}"
 echo "  ***  Done"
 
 sleep 5

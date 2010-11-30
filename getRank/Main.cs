@@ -20,6 +20,7 @@ namespace getRank
 			string s = "";
 			string f = "index.html";
 			string g = Directory.GetCurrentDirectory();
+			string t = "";
 			
 			if (args[0] == "--help" || args[0] == "-h")
 			{
@@ -47,6 +48,10 @@ namespace getRank
 					case "--git-dir":
 						g = args[i + 1];
 						break;
+					case "-t":
+					case "--template":
+						t = args[i + 1];
+						break;
 					}
 				}
 				
@@ -55,6 +60,7 @@ namespace getRank
 				FileInfo info = new FileInfo(d.Replace("\"", "").Replace("'", "") + "/" + f.Replace("\"", "").Replace("'", ""));
 				StreamWriter writer = info.CreateText();
 				
+				HtmlOut.TemplateDirectory = t;
 				HtmlOut.Template();
 				writer.Write(HtmlOut.header);
 			
@@ -63,7 +69,7 @@ namespace getRank
 				{
 					if (ranks[i] != null)
 					{
-						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));//ranks[i].name, ranks[i].email.GetRange(0, 1)[0], i + 1, ranks[i].Code()));
+						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));
 					}
 				}
 				writer.Write("<p>Updated " + DateTime.Now.ToString() + "</p>");
@@ -86,6 +92,8 @@ namespace getRank
 	ranks individuals from 1 to 50 (users below 50 are not included).
 	Dumps an html file based on the html template found in the htdocs
 	subdirectory.
+
+	-t, --template	Specifies the location of the template.
 
 	-d, --dir		Specifies the directory to output the html file.
 				If this argument isn't specified, program
