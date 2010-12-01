@@ -13,35 +13,15 @@ $(".stripeme tr:odd").addClass("alt");
 });
 </script>
 <script type="text/javascript" language="JavaScript"><!--
-function HideContent(d) {
-if(d.length < 1) { return; }
-document.getElementById(d).style.display = "none";
-}
-function ShowContent(d) {
-if(d.length < 1) { return; }
-hideAllButThis(d);
-document.getElementById(d).style.display = "block";
+
+//I removed 2 functions that were no longer needed after adding this function that hides the row for the percentage bars
+function displayRow(row){
+	var row = document.getElementById(row);
+	if (row.style.display == '')  row.style.display = 'none';
+	else row.style.display = '';
 }
 
-
-function hideAllButThis(d) {
-for (var i = 1; i < 50; i++) {
-var id = 'top' + i;
-if (d != id) {
-document.getElementById(id).style.display = "none";
-}
-}
-}
-
-function ReverseContentDisplay(d) {
-
-if(d.length < 1) { return; }
-if(document.getElementById(d).style.display == "none") { document.getElementById(d).style.display = "block"; }
-else { document.getElementById(d).style.display = "none"; }
-
-hideAllButThis(d);
-}
-
+//This function gets the picture of the avatar for each user name
 function getAvatarURL(elm, email)
 {
 var base = "http://www.gravatar.com/avatar/";
@@ -49,6 +29,25 @@ var hash = MD5(email);
 var fullUrl = base+hash +".jpg";
 document.getElementById(elm).src = fullUrl;
 }
+
+//This function draws the percentage bar
+  function drawPercentBar(width, percent, color, background, project) 
+  { 
+    var pixels = width * (percent / 100); 
+    if (!background) { background = "none"; }
+ 
+    document.write("<div style=\"position: relative; line-height: 1em; background-color: " 
+
+                   + background + "; border: 1px solid black; width: " 
+                   + width + "px\">"); 
+    document.write("<div style=\"height: 1.5em; width: " + pixels + "px; background-color: "
+                   + color + ";\"></div>"); 
+    document.write("<div style=\"position: absolute; color: white; text-align: center; padding-top: .25em; width: " 
+                   + width + "px; top: 0; left: 0\">" + project + "</div>"); 
+
+    document.write("</div>"); 
+  } 
+
 
 //--></script>
 
@@ -94,7 +93,7 @@ document.getElementById(elm).src = fullUrl;
 	          <input type="hidden" value="www.mono-project.com" id="domains" name="domains" /> 
 	          <input class="text" name="q" id="q" type="text" value="Search Mono" 
 	            onblur="if (this.value == '') this.value='Search Mono';" 
-	            onfocus="if (this.value == 'Search Mono') this.value='';" /> 
+	            onfocus="if (this.value == 'Search Mono') this.value='rank server';" /> 
 	          <input class="button" type="submit" value="Go" /> 
 	        </div> 
 	      </form> 
@@ -137,19 +136,20 @@ document.getElementById(elm).src = fullUrl;
 	 	    </script>
 		</td>
 	         <td><!-- name --></td>
-                 <td><!-- score --></td>
-                 <td>  
-                    <a class="body" click="ReverseContentDisplay('top<!-- rank -->'); return true;"href="javascript:ReverseContentDisplay('top<!-- rank -->')">[show/hide]</a>
-                    <div id="top<!-- rank -->" style="display:none; position:absolute; width:10%; border-style: solid; background-color: white; color: black; padding: 5px;">
-			Total Code: <!-- code -->
-			<br/>Commits: <!-- commits -->
-			<!-- Data -->
-			<br/><!-- Project -->: <!-- projCode -->
-			<!-- End Data -->
-                     </div>
+                 <td><img src="../Output/img/small_banana_2.png" alt ="bunch of bananas"></img></td>
+		 <td><button onclick="displayRow('captionRow<!-- rank -->')">Show/Hide</button></td>              
 
-		 </td>
-	      </tr>
+              </tr>
+		 <tr id = "captionRow<!-- rank -->" style = "text-align:left; display:none; ">   
+
+			<!-- Data -->
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100, <!-- RedPercent -->, 'red', 'blue', "<!-- Project -->");</script>
+ 		     </td>
+			<!-- End Data -->
+		</tr>
+                   </div>
+	      
 		<!-- End User -->
 
 	  </tbody>
