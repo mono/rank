@@ -88,8 +88,10 @@ namespace getRank
 			{
 				data += ReplaceKeywords(projData, user, rank)
 					.Replace("<!-- Project -->", proj.name)
-					.Replace("<!-- projCode -->", "+" + proj.CodeAdded.ToString() + " -" + proj.CodeRemoved.ToString());
+					.Replace("<!-- projCode -->", "+" + proj.CodeAdded.ToString() + " -" + proj.CodeRemoved.ToString())
+					.Replace("<!-- RedPercent -->", proj.RedPercent().ToString());
 			}
+
 			data += ReplaceKeywords(userFooter, user, rank);
 			return data;
 		}

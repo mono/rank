@@ -60,7 +60,7 @@ namespace getRank
 				start = DateTime.Now.AddDays(-21);
 			}
 			
-			//UpdateRepo(directory);
+			UpdateRepo(directory);
 			Process p = new Process();
 			p.StartInfo.UseShellExecute = false;
 			p.StartInfo.RedirectStandardOutput = true;
@@ -204,27 +204,16 @@ namespace getRank
 		/// </returns>
 		internal User[] UserRanks()
 		{
-			int STOP = 0;
-			User[] ranks;
+			int STOP = users.Count - 1;
+			User[] ranks = new User[users.Count];
 			
-			if (users.Count < 50)
-			{
-				ranks = new User[users.Count];
-				STOP = users.Count - 1;
-			}
-			else
-			{
-				ranks = new User[50];
-				STOP = 49;
-			}
-
 			for (int i = 0; i <= STOP; i++)
 			{
 				int score = 0;
 				User highRanking = null;
 				foreach (User user in users)
 				{
-					if (user.Score() > score)
+					if (user.Score() >= score)
 					{
 						score = user.Score();
 						highRanking = user;
@@ -232,7 +221,6 @@ namespace getRank
 				}
 				ranks[i] = highRanking;
 				users.Remove(highRanking);
-				users.Capacity = users.Count;
 			}
 			return ranks;
 		}
@@ -264,14 +252,12 @@ namespace getRank
 		/// </summary>
 		internal int Score()
 		{
-			int score = CodeAdded() - CodeRemoved();
+			int score = CodeCurved();
 			
 			if (score < 0)
 			{
 				score = score * -1;
 			}
-			//Console.WriteLine(name + "\t" + "Curved code: " + CodeCurved() + "\t" + "Added - Removed: " + score);
-			Console.WriteLine(name + "\t\t" + "Added: " + CodeAdded() + "\t" + "Removed: " + CodeRemoved());
 			
 			score = (score * CommitCount()) / 100;
 			return score;
@@ -386,6 +372,11 @@ namespace getRank
 		private int codeAdded = 0;
 		private int codeRemoved = 0;
 		private List<string> commits = new List<string>();
+		
+		internal int RedPercent()
+		{
+			return (codeRemoved * 100) / (codeRemoved + codeAdded);
+		}
 		
 		/// <summary>
 		/// Represents a code curve based on individual commits.
