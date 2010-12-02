@@ -120,7 +120,6 @@ document.getElementById(elm).src = fullUrl;
 	<table class = "stripeme">
           <tbody> 
 	      <tr>
-   	         <th>Rank</th>
 	         <th>Picture</th>
                  <th>Name</th>
 	         <th>Bananas</th>
@@ -129,7 +128,6 @@ document.getElementById(elm).src = fullUrl;
 
 		<!-- Begin User -->
 	      <tr id = "tablerow">
-	         <td><!-- rank --></td>
 		 <td><img id="avatarimg<!-- rank -->" src="" style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
 		    <script type="text/javascript">
       			window.onload = getAvatarURL('avatarimg<!-- rank -->', '<!-- email -->');
@@ -141,10 +139,9 @@ document.getElementById(elm).src = fullUrl;
 
               </tr>
 		 <tr id = "captionRow<!-- rank -->" style = "text-align:left; display:none; ">   
-
 			<!-- Data -->
 		     <td>
-                         <script language= "JavaScript">drawPercentBar(100, <!-- RedPercent -->, 'red', 'blue', "<!-- Project -->");</script>
+                         <script language= "JavaScript">drawPercentBar(100, <!-- RedPercent -->,'red', 'blue',"<!-- Project -->");</script>
  		     </td>
 			<!-- End Data -->
 		</tr>
