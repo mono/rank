@@ -39,11 +39,11 @@ document.getElementById(elm).src = fullUrl;
     document.write("<div style=\"position: relative; line-height: 1em; background-color: " 
 
                    + background + "; border: 1px solid black; width: " 
-                   + width + "px\">"); 
-    document.write("<div style=\"height: 1.5em; width: " + pixels + "px; background-color: "
+                   + width + "%\">"); 
+    document.write("<div style=\"height: 1.5em; width: " + pixels + "%; background-color: "
                    + color + ";\"></div>"); 
     document.write("<div style=\"position: absolute; color: white; text-align: center; padding-top: .25em; width: " 
-                   + width + "px; top: 0; left: 0\">" + project + "</div>"); 
+                   + width + "%; top: 0; left: 0\">" + project + "</div>"); 
 
     document.write("</div>"); 
   } 
@@ -141,7 +141,7 @@ document.getElementById(elm).src = fullUrl;
 		 <tr id = "captionRow<!-- rank -->" style = "text-align:left; display:none; ">   
 			<!-- Data -->
 		     <td>
-                         <script language= "JavaScript">drawPercentBar(100, <!-- RedPercent -->,'red', 'blue',"<!-- Project -->");</script>
+                         <script language= "JavaScript">drawPercentBar(100,<!-- RedPercent -->,'red', 'blue',"<!-- Project -->");</script>
  		     </td>
 			<!-- End Data -->
 		</tr>
