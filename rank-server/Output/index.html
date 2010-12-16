@@ -1,0 +1,929 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr"> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<link rel="stylesheet" type="text/css" href="css/MonoRanking.css" />
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script src="scripts/MD5.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".stripeme tr:odd").addClass("alt");
+
+});
+</script>
+<script type="text/javascript" language="JavaScript"><!--
+
+//I removed 2 functions that were no longer needed after adding this function that hides the row for the percentage bars
+function displayRow(row){
+	var row = document.getElementById(row);
+	if (row.style.display == '')  row.style.display = 'none';
+	else row.style.display = '';
+}
+
+//This function gets the picture of the avatar for each user name
+function getAvatarURL(elm, email)
+{
+var base = "http://www.gravatar.com/avatar/";
+var hash = MD5(email);
+var fullUrl = base+hash +".jpg";
+document.getElementById(elm).src = fullUrl;
+}
+
+//This function draws the percentage bar
+  function drawPercentBar(width, percent, color, background, project) 
+  { 
+    var pixels = width * (percent / 100); 
+    if (!background) { background = "none"; }
+ 
+    document.write("<div style=\"position: relative; line-height: 1em; background-color: " 
+
+                   + background + "; border: 1px solid black; width: " 
+                   + width + "%\">"); 
+    document.write("<div style=\"height: 1.5em; width: " + pixels + "%; background-color: "
+                   + color + ";\"></div>"); 
+    document.write("<div style=\"position: absolute; color: white; text-align: center; padding-top: .25em; width: " 
+                   + width + "%; top: 0; left: 0\">" + project + "</div>"); 
+
+    document.write("</div>"); 
+  } 
+
+
+//--></script>
+
+
+    <meta name="KEYWORDS" content="Rank" /> 
+<meta name="robots" content="index,follow" /> 
+<meta name="verify-v1" content="CdUrKULfeirXCs/Mpc2sobgsPFNoqmiRL/5n0n08dAY=" /><link rel="shortcut icon" href="/favicon.ico" /> 
+<link title="Creative Commons" type="application/rdf+xml" href="/index.php?title=Rank&amp;action=creativecommons" rel="meta" /> 
+<link rel="copyright" href="http://www.gnu.org/copyleft/fdl.html" /> 
+    <title>Rank - Mono</title> 
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://mono-project.com/news/index.rss2"/> 
+    <link rel="stylesheet" type="text/css" media="print" href="http://mono-project.com/skins/common/commonPrint.css" /> 
+    <link rel="stylesheet" type="text/css" media="screen" href="http://mono-project.com/skins/MonoWaveWide/screen.css" /> 
+    <script type="text/javascript" src="http://mono-project.com/skins/MonoWaveWide/prototype.js"></script> 
+    <script type="text/javascript" src="http://mono-project.com/skins/MonoWaveWide/wikihacks.js"></script> 
+    <script type="text/javascript" src="http://mono-project.com/skins/common/wikibits.js"></script> 
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> </script> 
+    <script type="text/javascript"> 
+        _uacct = "UA-76510-1";
+        urchinTracker();
+    </script> 
+  </head> 
+  <body id="page-Rank" class="ns-0" onclick="hideAllButThis('')"> 
+    
+  <div id="header"> 
+		<div class="wrapper"> 
+	    <h1>Mono</h1>    
+	    <a href="http://mono-project.com/" title="Mono"><div id="mono-logo"></div></a> 
+	    <ul> 
+	    	      <li  id="menu-n-home"><a href="http://mono-project.com/Main_Page">Home</a></li> 
+		      <li  id="menu-n-download"><a href="http://www.go-mono.com/mono-downloads/download.html">Download</a></li> 
+		      <li class="current_page_item" id="menu-n-start"><a href="http://mono-project.com/Start">Start</a></li> 
+		      <li  id="menu-n-news"><a href="http://www.mono-project.com/news/">News</a></li> 
+		      <li  id="menu-n-contribute"><a href="http://mono-project.com/Contributing">Contribute</a></li> 
+		      <li  id="menu-n-community"><a href="http://mono-project.com/Community">Community</a></li> 
+		      <li  id="menu-n-support"><a href="http://mono-project.com/Support">Support</a></li> 
+		      <li  id="menu-n-store"><a href="http://mono-project.com/Store">Store</a></li> 
+		    </ul> 
+	    <div id="search"> 
+	      <form method="get" action="http://www.google.com/search?"> 
+	        <div> 
+	          <input type="hidden" value="www.mono-project.com" id="sitesearch" name="sitesearch" /> 
+	          <input type="hidden" value="www.mono-project.com" id="domains" name="domains" /> 
+	          <input class="text" name="q" id="q" type="text" value="Search Mono" 
+	            onblur="if (this.value == '') this.value='Search Mono';" 
+	            onfocus="if (this.value == 'Search Mono') this.value='rank server';" /> 
+	          <input class="button" type="submit" value="Go" /> 
+	        </div> 
+	      </form> 
+      </div><!--#search--> 
+    </div><!--.wrapper--> 
+  </div><!--#header--> 
+ 
+ 
+<div id="page"> 
+    <div id="content-header"><h2><!--BEGIN PAGE TITLE-->Ranking the voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
+    <div id="wrapper" class="wide"> 
+ 
+    <div id="sidebar"> 
+    <div id="toc-parent"></div> 
+    <!-- BEGIN SIDE CONTENT --> 
+    
+    
+    <!-- END SIDE CONTENT --> 
+    </div><!--#sidebar--> 
+    <div id="content" class="wide"> 
+    <!-- BEGIN MAIN CONTENT --> 
+ 
+
+	<table class = "stripeme">
+          <tbody> 
+	      <tr>
+	         <th>Picture</th>
+                 <th>Name</th>
+	         <th>Bananas</th>
+                 <th>Details</th>
+	      </tr>
+
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg1" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg1', 'marek.safar@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Marek Safar</td>
+                 <td><img src="img/banana_tree.png" title="48110" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow1')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow1" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,15,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg2" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg2', 'atsushi@ximian.com');
+	 	    </script>
+		</td>
+	         <td>Atsushi Eno</td>
+                 <td><img src="img/banana_tree.png" title="1294" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow2')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow2" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,39,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg3" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg3', 'vargaz@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Zoltan Varga</td>
+                 <td><img src="img/banana_tree.png" title="510" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow3')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow3" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,35,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg4" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg4', 'lupus@oddwiz.org');
+	 	    </script>
+		</td>
+	         <td>Paolo Molaro</td>
+                 <td><img src="img/" title="398" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow4')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow4" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,24,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg5" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg5', 'kumpera@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Rodrigo Kumpera</td>
+                 <td><img src="img/" title="314" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow5')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow5" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,40,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg6" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg6', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Bojan Rajkovic</td>
+                 <td><img src="img/" title="255" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow6')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow6" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,98,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg7" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg7', 'jeremie.laval@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Jérémie Laval</td>
+                 <td><img src="img/" title="148" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow7')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow7" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,44,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg8" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg8', 'vargaz@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Robert Nagy</td>
+                 <td><img src="img/" title="135" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow8')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow8" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,16,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg9" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg9', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Miguel de Icaza</td>
+                 <td><img src="img/banana_bunches.png" title="68" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow9')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow9" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,49,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg10" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg10', 'jonpryor@vt.edu');
+	 	    </script>
+		</td>
+	         <td>Jonathan Pryor</td>
+                 <td><img src="img/banana_bunches.png" title="63" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow10')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow10" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,10,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg11" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg11', 'mark.probst@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Mark Probst</td>
+                 <td><img src="img/3_bananas.png" title="28" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow11')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow11" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,25,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg12" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg12', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Thomas Goldstein</td>
+                 <td><img src="img/3_bananas.png" title="13" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow12')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow12" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,48,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg13" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg13', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Ralph Leckett</td>
+                 <td><img src="img/3_bananas.png" title="9" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow13')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow13" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,49,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg14" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg14', 'grendel@twistedcode.net');
+	 	    </script>
+		</td>
+	         <td>Marek Habersack</td>
+                 <td><img src="img/3_bananas.png" title="9" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow14')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow14" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,25,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg15" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg15', 'gonzalo.mono@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Gonzalo Paniagua Javier</td>
+                 <td><img src="img/3_bananas.png" title="6" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow15')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow15" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,34,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg16" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg16', 'martin@novell.com');
+	 	    </script>
+		</td>
+	         <td>Martin Baulig</td>
+                 <td><img src="img/3_bananas.png" title="6" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow16')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow16" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,1,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg17" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg17', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Tom Hindle</td>
+                 <td><img src="img/3_bananas.png" title="4" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow17')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow17" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,26,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg18" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg18', 'jbevain@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Jb Evain</td>
+                 <td><img src="img/3_bananas.png" title="3" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow18')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow18" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,15,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg19" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg19', 'grompf@sublimeintervention.com');
+	 	    </script>
+		</td>
+	         <td>Geoff Norton</td>
+                 <td><img src="img/3_bananas.png" title="2" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow19')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow19" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,8,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg20" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg20', 'lluis@novell.com');
+	 	    </script>
+		</td>
+	         <td>Lluis Sanchez</td>
+                 <td><img src="img/3_bananas.png" title="2" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow20')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow20" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,27,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg21" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg21', 'sebastien@ximian.com');
+	 	    </script>
+		</td>
+	         <td>Sebastien Pouliot</td>
+                 <td><img src="img/3_bananas.png" title="1" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow21')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow21" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,14,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg22" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg22', 'jbevain@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Daniel Sell</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow22')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow22" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,0,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg23" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg23', 'shana@jitted.com');
+	 	    </script>
+		</td>
+	         <td>Andreia Gaita</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow23')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow23" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,9,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg24" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg24', 'gonzalo.mono@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Joe Dluzen</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow24')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow24" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,31,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg25" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg25', 'nekresh@gmail.com');
+	 	    </script>
+		</td>
+	         <td>Guillaume Pouillet</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow25')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow25" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,0,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg26" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg26', 'v.varadhan@gmail.com');
+	 	    </script>
+		</td>
+	         <td>vvaradhan</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow26')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow26" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,38,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg27" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg27', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Alex</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow27')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow27" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,48,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg28" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg28', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Nagappan Alagappan</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow28')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow28" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,10,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg29" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg29', 'miguel@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Andy Hume</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow29')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow29" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,25,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg30" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg30', 'joncham@gmail.com');
+	 	    </script>
+		</td>
+	         <td>joncham</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow30')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow30" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,50,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg31" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg31', 'xtzgzorex@gmail.com');
+	 	    </script>
+		</td>
+	         <td>XTZGZoReX</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow31')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow31" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,45,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg32" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg32', 'ajorgensen@novell.com');
+	 	    </script>
+		</td>
+	         <td>Andrew Jorgensen</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow32')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow32" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,83,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg33" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg33', 'mhutchinson@novell.com');
+	 	    </script>
+		</td>
+	         <td>Michael Hutchinson</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow33')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow33" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,16,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		
+	      <tr id = "tablerow">
+		 <td><img id="avatarimg34" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		    <script type="text/javascript">
+      			window.onload = getAvatarURL('avatarimg34', 'fejj@gnome.org');
+	 	    </script>
+		</td>
+	         <td>Jeffrey Stedfast</td>
+                 <td><img src="img/peel.png" title="0" alt="bunch of bananas" class = "tooltip"></img></td>
+		 <td><button onclick="displayRow('captionRow34')">Show/Hide</button></td>              
+
+              </tr>
+		 <tr id = "captionRow34" style = "text-align:left; display:none; ">   
+			
+		     <td>
+                         <script language= "JavaScript">drawPercentBar(100,50,'red', 'blue',"mono");</script>
+ 		     </td>
+			
+		</tr>
+                   </div>
+	      
+		<p>Updated 12/16/2010 1:14:03 PM</p>
+
+	  </tbody>
+	</table>
+
+
+
+</p><div class="printfooter"> 
+</div> 
+ 
+ 
+    <!-- END MAIN CONTENT --> 
+    </div><!--#content--> 
+    
+ 
+    
+  </div><!--#wrapper--> 
+</div><!--#page--> 
+<div id="footer-hr"></div> 
+<div id="footer"> 
+                <ul id="footer-menu"> 
+                    <li><a href="http://www.novell.com/linux"><div id="novell-logo"></div></a> 
+                        <ul> 
+                            <li style="margin-top: 15px;"><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/us/"> 
+                            <div id="by-sa"></div></a></li> 
+                            <li><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/"> 
+                            <div id="by-nc-nd"></div></a></li> 
+                            <li><a href="/Legal">Legal Notices</a></li> 
+                            <li>          
+<a href="/index.php?title=Special:Userlogin&amp;returnto=Rank">Editor Login</a>                        </li> 
+                        </ul> 
+                    </li> 
+                    <li>Mono
+                        <ul> 
+                            <li><a href="/About">About</a></li> 
+                            <li><a href="/Roadmap">Roadmap</a></li> 
+                            <li><a href="/Plans">Technologies</a></li> 
+                            <li><a href="/Screenshots">Screenshots</a></li> 
+                            <li><a href="/FAQ:_General">FAQ</a></li> 
+                            <li><a href="/Contact">Contact</a></li> 
+                        </ul> 
+                    </li> 
+                    <li>Download
+                      <ul> 
+                          <li><a href="http://www.go-mono.com/mono-downloads/download.html">Latest Release</a></li> 
+                          <li><a href="http://mono.ximian.com/daily/">Daily Snapshots</a></li> 
+                          <li><a href="http://www.mono-project.com/OldReleases">Previous Releases</a></li> 
+                          <li><a href="http://monodevelop.com/Download">MonoDevelop</a></li> 
+                          <li><a href="http://www.mono-project.com/MoMA">Mono Migration Analyzer</a></li> 
+                          <li><a href="http://www.go-mono.com/moonlight/">Moonlight</a></li> 
+                          <li><a href="http://www.go-mono.com/monovs/download">Mono Tools for Visual Studio</a></li> 
+                          <li><a href="http://monotouch.net/DownloadTrial">MonoTouch</a></li> 
+                          <li><a href="http://www.novell.com/products/mono/eval.html">SUSE Linux Enterprise<br/>Edition Mono Extension</a></li> 
+                      </ul> 
+                  </li> 
+                    <li>Documentation
+                        <ul> 
+                            <li><a href="/Start">Getting Started</a></li> 
+                            <li><a href="http://www.go-mono.com/docs/">API Reference</a></li> 
+                            <li><a href="/Articles">Articles</a></li> 
+                        </ul> 
+                    </li> 
+                    <li>Community
+                        <ul> 
+                            <li><a href="/Mailing_Lists">Mailing Lists</a></li> 
+                            <li><a href="http://www.go-mono.com/forums">Forums</a></li> 
+                            <li><a href="/IRC" class="external">Chat/IRC</a></li> 
+                            <li><a href="http://www.go-mono.com/monologue">Blogs</a></li> 
+                        </ul> 
+                    </li> 
+                    <li>Contribute
+                        <ul> 
+                            <li><a href="/Contributing">Contributing Guide</a></li> 
+                            <li><a href="/Bugs">Report Bugs</a></li> 
+                            <li><a href="/SVN">SVN</a></li> 
+                            <li><a href="http://wrench.mono-project.com/builds">Build Status</a></li> 
+                            <li><a href="http://go-mono.com/status/">Class Status</a></li> 
+ 
+                        </ul> 
+                    </li> 
+                </ul> 
+            <div style="clear: both;"></div> 
+</div> 
+ 
+ 
+</body> 
+</html> 
