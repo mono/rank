@@ -102,8 +102,46 @@ namespace getRank
 				.Replace("<!-- name -->", user.name)
 				.Replace("<!-- code -->", user.CodeAdded().ToString())
 				.Replace("<!-- email -->", user.email[0])
+				.Replace("<!-- Image -->", ReplaceImageName(user))
 				.Replace("<!-- score -->", user.Score().ToString())
 				.Replace("<!-- commits -->", user.CommitCount().ToString());
+		}
+		
+		private static string ReplaceImageName(User user)
+		{
+			int PLANTATION = 50000;
+			int TREE = 500;
+			int CRATE = 100;
+			int BUNCHES = 50;
+			int BUNCH = 0;
+			int PEEL = 0;
+			
+			if (user.Score() > PLANTATION)
+			{
+				return "";
+			}
+			else if (user.Score() > TREE)
+			{
+				return "banana_tree.png";
+			}
+			else if (user.Score() > CRATE)
+			{
+				return "";
+			}
+			else if (user.Score() > BUNCHES)
+			{
+				return "banana_bunches.png";
+			}
+			else if (user.Score() > BUNCH)
+			{
+				return "3_bananas.png";
+			}
+			else if (user.Score() == PEEL)
+			{
+				return "peel.png";
+			}
+
+			return "";
 		}
 		
 		private static void UserTemplate(string template)
