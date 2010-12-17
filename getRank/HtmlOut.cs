@@ -109,16 +109,16 @@ namespace getRank
 		
 		private static string ReplaceImageName(User user)
 		{
-			int PLANTATION = 50000;
+			int GROVE = 5000;
 			int TREE = 500;
 			int CRATE = 100;
 			int BUNCHES = 50;
 			int BUNCH = 0;
 			int PEEL = 0;
 			
-			if (user.Score() > PLANTATION)
+			if (user.Score() > GROVE)
 			{
-				return "";
+				return "grove.png";
 			}
 			else if (user.Score() > TREE)
 			{
