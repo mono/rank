@@ -126,7 +126,7 @@ namespace getRank
 			}
 			else if (user.Score() > CRATE)
 			{
-				return "";
+				return "crate.png";
 			}
 			else if (user.Score() > BUNCHES)
 			{
