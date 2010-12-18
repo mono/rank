@@ -88,7 +88,7 @@ namespace getRank
 		
 		private string GetMailingListEmails()
 		{
-			StreamReader read = File.OpenText("/home/dmulder/monolists");
+			StreamReader read = File.OpenText("/home/rupert/monolists");
 			string emails = "";
 			while (!read.EndOfStream)
 			{
