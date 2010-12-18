@@ -70,6 +70,12 @@ namespace getRank
 					if (ranks[i] != null)
 					{
 						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));
+						string emails = "";
+						foreach (string email in ranks[i].email)
+						{
+							emails += email + ";";
+						}
+						Console.WriteLine(ranks[i].name + ", " + emails + ", +" + ranks[i].CodeAdded() + ", -" + ranks[i].CodeRemoved() + ", Messages: " + ranks[i].MailingListMessages());
 					}
 				}
 				writer.Write("<p>Updated " + DateTime.Now.ToString() + "</p>");
