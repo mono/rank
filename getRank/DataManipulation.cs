@@ -341,7 +341,7 @@ namespace getRank
 				score = score * -1;
 			}
 			
-			score = ((score * CommitCount()) + (MailingListMessages() * 5)) / 100;
+			score = ((score * CommitCount()) + (MailingListMessages() * 5));
 			return score;
 		}
 		
