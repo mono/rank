@@ -109,9 +109,9 @@ namespace getRank
 		
 		private static string ReplaceImageName(User user)
 		{
-			int GROVE = 5000;
-			int TREE = 500;
-			int CRATE = 100;
+			int GROVE = 50000;
+			int TREE = 5000;
+			int CRATE = 500;
 			int BUNCHES = 50;
 			int BUNCH = 0;
 			int PEEL = 0;
