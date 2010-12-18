@@ -50,18 +50,23 @@ namespace getRank
 			string[] splitValue = new string[1];
 			splitValue[0] = "\n";
 			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
+			DateTime dtDate;
 			
 			for (int i = 0; i < emailLines.Length; i++)
 			{
 				try
 				{
-					if (emailLines[i].Contains("Date: ") && emailLines[i + 1].Contains("From: "))
+					if (emailLines[i].Contains("Date: "))
 					{
 						string date = emailLines[i].Replace("Date: ", "").Substring(5, 11);
-						DateTime dtDate = DateTime.Parse(date);
+						dtDate = DateTime.Parse(date);
+
+					}
+					else if (emailLines[i].Contains("From: "))
+					{
 						if (dtDate > start_date)
 						{
-							string nameEmailLine = emailLines[i +1].Replace("From: ", "");
+							string nameEmailLine = emailLines[i].Replace("From: ", "");
 							string name = nameEmailLine.Substring(0, nameEmailLine.IndexOf('<') - 1).Trim();
 							string email = nameEmailLine.Trim().Substring(name.Length, nameEmailLine.Length - name.Length).Replace("<", "").Replace(">", "").Trim();
 							User user;
@@ -76,7 +81,7 @@ namespace getRank
 								user = iUser(email);
 							}
 							user.MailingListMessages(1);
-						}
+						}	
 					}
 				}
 				catch(Exception e)
