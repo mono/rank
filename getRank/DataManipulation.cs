@@ -22,7 +22,80 @@ namespace getRank
 		
 		public DataManipulation (string directory, string start_date)
 		{
-			GetDirectoryStructure(directory, start_date);
+			DateTime start = GetStartDate(start_date);
+			GetDirectoryStructure(directory, start);
+			GetMailingListData(start);
+		}
+		
+		private DateTime GetStartDate(string start_date)
+		{
+			DateTime start = DateTime.Now;
+			try
+			{
+				start = DateTime.Parse(start_date);
+			}
+			catch
+			{
+				start = DateTime.Now.AddDays(-21);
+			}
+			return start;
+		}
+		
+		/// <summary>
+		/// Retreives contribution data from the mailing lists.
+		/// </summary>
+		private void GetMailingListData(DateTime start_date)
+		{
+			string emails = GetMailingListEmails();
+			string[] splitValue = new string[1];
+			splitValue[0] = "\n";
+			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
+			
+			for (int i = 0; i < emailLines.Length; i++)
+			{
+				try
+				{
+					if (emailLines[i].Contains("Date: ") && emailLines[i + 1].Contains("From: "))
+					{
+						string date = emailLines[i].Replace("Date: ", "").Substring(5, 11);
+						DateTime dtDate = DateTime.Parse(date);
+						if (dtDate > start_date)
+						{
+							string nameEmailLine = emailLines[i +1].Replace("From: ", "");
+							string name = nameEmailLine.Substring(0, nameEmailLine.IndexOf('<') - 1).Trim();
+							string email = nameEmailLine.Trim().Substring(name.Length, nameEmailLine.Length - name.Length).Replace("<", "").Replace(">", "").Trim();
+							User user;
+							name = UserName(email, name);
+							if (!UserExists(email, name))
+							{
+								user = new User(email, name);
+								users.Add(user);
+							}
+							else
+							{
+								user = iUser(email);
+							}
+							user.MailingListMessages(1);
+						}
+					}
+				}
+				catch(Exception e)
+				{
+					Console.WriteLine(e.Message);
+				}
+			}
+		}
+		
+		private string GetMailingListEmails()
+		{
+			StreamReader read = File.OpenText("/home/dmulder/monolists");
+			string emails = "";
+			while (!read.EndOfStream)
+			{
+				emails += read.ReadLine() + Environment.NewLine;
+			}
+			
+			return emails;
 		}
 		
 		/// <summary>
@@ -31,7 +104,7 @@ namespace getRank
 		/// <param name="directory">
 		/// The current (parent) directory <see cref="System.String"/>
 		/// </param>
-		private void GetDirectoryStructure(string directory, string start_date)
+		private void GetDirectoryStructure(string directory, DateTime start_date)
 		{
 			string[] folders = Directory.GetDirectories(directory);
 			
@@ -48,18 +121,8 @@ namespace getRank
 		/// <returns>
 		/// A string containing the git log <see cref="System.String"/>
 		/// </returns>
-		private void GetGitData(string directory, string start_date, string project)
-		{
-			DateTime start = DateTime.Now;
-			try
-			{
-				start = DateTime.Parse(start_date);
-			}
-			catch
-			{
-				start = DateTime.Now.AddDays(-21);
-			}
-			
+		private void GetGitData(string directory, DateTime start, string project)
+		{	
 			UpdateRepo(directory);
 			Process p = new Process();
 			p.StartInfo.UseShellExecute = false;
@@ -196,6 +259,19 @@ namespace getRank
 			return exists;
 		}
 		
+		private string UserName(string email, string defaultname)
+		{
+			string name = defaultname;
+			foreach (User user in users)
+			{
+				if (user.email.Contains(email))
+				{
+					name = user.name;
+				}
+			}
+			return name;
+		}
+		
 		/// <summary>
 		/// Sorts users by number of commits.
 		/// </summary>
@@ -231,6 +307,7 @@ namespace getRank
 		internal List<string> email = new List<string>();
 		internal string name {get; set;}
 		internal List<Project> projects = new List<Project>();
+		internal int mailingListMessages = 0;
 		
 		/// <summary>
 		/// Sets the user information.
@@ -259,8 +336,26 @@ namespace getRank
 				score = score * -1;
 			}
 			
-			score = (score * CommitCount()) / 100;
+			score = ((score * CommitCount()) + (MailingListMessages() * 5)) / 100;
 			return score;
+		}
+		
+		/// <summary>
+		/// Returns the number of messages a user has contributed
+		/// in the mailing lists.
+		/// </summary>
+		internal int MailingListMessages()
+		{
+			return mailingListMessages;
+		}
+		
+		/// <summary>
+		/// Adds to the number of messages that the user has sent to
+		/// the mailing lists.
+		/// </summary>
+		internal void MailingListMessages(int count)
+		{
+			mailingListMessages += count;
 		}
 		
 		/// <summary>
