@@ -75,7 +75,7 @@ namespace getRank
 						{
 							emails += email + ";";
 						}
-						Console.WriteLine(ranks[i].name + ", " + emails + ", +" + ranks[i].CodeAdded() + ", -" + ranks[i].CodeRemoved() + ", Messages: " + ranks[i].MailingListMessages());
+						Console.WriteLine(ranks[i].name + ", " + emails + ", +" + ranks[i].CodeAdded() + ", -" + ranks[i].CodeRemoved() + ", Commits: " + ranks[i].CommitCount() + ", Messages: " + ranks[i].MailingListMessages());
 					}
 				}
 				writer.Write("<p>Updated " + DateTime.Now.ToString() + "</p>");
