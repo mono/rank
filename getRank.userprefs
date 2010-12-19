@@ -1,15 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="getRank/Main.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="getRank/HtmlOut.cs">
     <Files>
-      <File FileName="getRank/Main.cs" Line="58" Column="40" />
-      <File FileName="getRank/DataManipulation.cs" Line="23" Column="17" />
-      <File FileName="getRank/HtmlOut.cs" Line="47" Column="5" />
+      <File FileName="getRank/Main.cs" Line="78" Column="159" />
+      <File FileName="getRank/DataManipulation.cs" Line="99" Column="5" />
+      <File FileName="getRank/HtmlOut.cs" Line="131" Column="36" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="getRank" expanded="True" selected="True" />
+          <Node name="getRank" expanded="True">
+            <Node name="HtmlOut.cs" selected="True" />
+          </Node>
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -21,7 +23,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/dmulder/rank/getRank/DataManipulation.cs" line="98" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="getRank/DataManipulation.cs" line="67" offsetX="662" offsetY="768" expression="user" liveUpdate="False" />
