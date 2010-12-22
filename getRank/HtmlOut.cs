@@ -92,7 +92,7 @@ namespace getRank
 					.Replace("<!-- RedPercent -->", proj.RedPercent().ToString());
 			}
 			
-			for (int i = 1; i < (4 - user.projects.Count); i++)
+			for (int i = 0; i < (4 - user.projects.Count); i++)
 			{
 				data += "<td></td>";
 			}
