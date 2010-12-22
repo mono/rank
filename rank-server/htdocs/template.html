@@ -6,12 +6,6 @@
 <link rel="stylesheet" type="text/css" href="css/MonoRanking.css" />
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script src="scripts/MD5.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-$(".stripeme tr:odd").addClass("alt");
-
-});
-</script>
 <script type="text/javascript" language="JavaScript"><!--
 
 //I removed 2 functions that were no longer needed after adding this function that hides the row for the percentage bars
@@ -48,6 +42,13 @@ document.getElementById(elm).src = fullUrl;
     document.write("</div>"); 
   } 
 
+function Striping(row, number)
+{
+    if (number%2 != 0)
+    {
+	document.getElementById(row).className = "alt";
+    }
+}
 
 //--></script>
 
@@ -127,7 +128,8 @@ document.getElementById(elm).src = fullUrl;
 	      </tr>
 
 		<!-- Begin User -->
-	      <tr id = "tablerow">
+	      <tr id = "tablerow<!-- rank -->">
+		 <script language= "JavaScript">Striping('tablerow<!-- rank -->', <!-- rank -->);</script>
 		 <td><img id="avatarimg<!-- rank -->" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
 		    <script type="text/javascript">
       			window.onload = getAvatarURL('avatarimg<!-- rank -->', '<!-- email -->');
@@ -138,7 +140,8 @@ document.getElementById(elm).src = fullUrl;
 		 <td><button onclick="displayRow('captionRow<!-- rank -->')">Show/Hide</button></td>              
 
               </tr>
-		 <tr id = "captionRow<!-- rank -->" style = "text-align:left; display:none; ">   
+		 <tr id = "captionRow<!-- rank -->" style = "text-align:left; display:none; "> 
+		     <script language= "JavaScript">Striping('captionRow<!-- rank -->', <!-- rank -->);</script>  
 			<!-- Data -->
 		     <td>
                          <script language= "JavaScript">drawPercentBar(100,<!-- RedPercent -->,'red', 'blue',"<!-- Project -->");</script>
