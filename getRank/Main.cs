@@ -78,7 +78,6 @@ namespace getRank
 						Console.WriteLine(ranks[i].name + ", " + emails + ", +" + ranks[i].CodeAdded() + ", -" + ranks[i].CodeRemoved() + ", Commits: " + ranks[i].CommitCount() + ", Messages: " + ranks[i].MailingListMessages());
 					}
 				}
-				writer.Write("<p>Updated " + DateTime.Now.ToString() + "</p>");
 				writer.Write(HtmlOut.footer);
 				writer.Close();
 			}
