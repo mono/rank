@@ -50,7 +50,7 @@ namespace getRank
 			string[] splitValue = new string[1];
 			splitValue[0] = "\n";
 			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
-			DateTime dtDate;
+			DateTime dtDate = new DateTime();
 			
 			for (int i = 0; i < emailLines.Length; i++)
 			{
@@ -60,7 +60,6 @@ namespace getRank
 					{
 						string date = emailLines[i].Replace("Date: ", "").Substring(5, 11);
 						dtDate = DateTime.Parse(date);
-
 					}
 					else if (emailLines[i].Contains("From: "))
 					{
@@ -93,15 +92,9 @@ namespace getRank
 		
 		private string GetMailingListEmails()
 		{
+			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
 			StreamReader read;
-			try
-			{
-				read = File.OpenText("/home/rupert/monolists");
-			}
-			catch
-			{
-				read = File.OpenText("$HOME/monolists");
-			}
+			read = File.OpenText(homePath + "/monolists");
 			string emails = "";
 			while (!read.EndOfStream)
 			{
