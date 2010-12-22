@@ -36,8 +36,7 @@ document.getElementById(elm).src = fullUrl;
                    + width + "%\">"); 
     document.write("<div style=\"height: 1.5em; width: " + pixels + "%; background-color: "
                    + color + ";\"></div>"); 
-    document.write("<div style=\"position: absolute; color: white; text-align: center; padding-top: .25em; width: " 
-                   + width + "%; top: 0; left: 0\">" + project + "</div>"); 
+    document.write("<div style=\"position: absolute; color: white; text-align: center; padding-top: .25em; width:100%; top: 0; left: 0\">" + project + "</div>"); 
 
     document.write("</div>"); 
   } 
@@ -121,7 +120,7 @@ function Striping(row, number)
 	<table class = "stripeme">
           <tbody> 
 	      <tr>
-	         <th>Picture</th>
+	         <th>Gravatar</th>
                  <th>Name</th>
 	         <th>Bananas</th>
                  <th>Details</th>
@@ -130,7 +129,7 @@ function Striping(row, number)
 		<!-- Begin User -->
 	      <tr id = "tablerow<!-- rank -->">
 		 <script language= "JavaScript">Striping('tablerow<!-- rank -->', <!-- rank -->);</script>
-		 <td><img id="avatarimg<!-- rank -->" src="" style="float:left; margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
+		 <td><img id="avatarimg<!-- rank -->" src="" style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
 		    <script type="text/javascript">
       			window.onload = getAvatarURL('avatarimg<!-- rank -->', '<!-- email -->');
 	 	    </script>
@@ -140,11 +139,13 @@ function Striping(row, number)
 		 <td><button onclick="displayRow('captionRow<!-- rank -->')">Show/Hide</button></td>              
 
               </tr>
-		 <tr id = "captionRow<!-- rank -->" style = "text-align:left; display:none; "> 
+		 <tr id = "captionRow<!-- rank -->" style = "display:none; "> 
 		     <script language= "JavaScript">Striping('captionRow<!-- rank -->', <!-- rank -->);</script>  
 			<!-- Data -->
 		     <td>
-                         <script language= "JavaScript">drawPercentBar(100,<!-- RedPercent -->,'red', 'blue',"<!-- Project -->");</script>
+			<div style="padding-right:25%; padding-left:25%;">
+                            <script language= "JavaScript">drawPercentBar(100,<!-- RedPercent -->,'red', 'blue',"<!-- Project -->");</script>
+		        </div>
  		     </td>
 			<!-- End Data -->
 		</tr>
@@ -198,7 +199,7 @@ function Striping(row, number)
                           <li><a href="http://mono.ximian.com/daily/">Daily Snapshots</a></li> 
                           <li><a href="http://www.mono-project.com/OldReleases">Previous Releases</a></li> 
                           <li><a href="http://monodevelop.com/Download">MonoDevelop</a></li> 
-                          <li><a href="http://www.mono-project.com/MoMA">Mono Migration Analyzer</a></li> 
+                          <li><a href="http://www55.mono-project.com/MoMA">Mono Migration Analyzer</a></li> 
                           <li><a href="http://www.go-mono.com/moonlight/">Moonlight</a></li> 
                           <li><a href="http://www.go-mono.com/monovs/download">Mono Tools for Visual Studio</a></li> 
                           <li><a href="http://monotouch.net/DownloadTrial">MonoTouch</a></li> 

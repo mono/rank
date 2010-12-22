@@ -6,16 +6,20 @@ position:relative;
 table {
 width: 100%;
 border-collapse: collapse;
+
+}
+
+table th
+{
+text-align:center;
 }
 
 tr.alt td {
 background: #6996D3;
 color:white;
-
+text-align:center;
 }
 
-#stripeme {
-}
 
 
 
@@ -23,12 +27,10 @@ td {
 padding-top: 10px;
 padding-bottom: 10px;
 height: 100%;
+width:25%;
+text-align:center;
 }
 
-table .alt {
-color: green;
-
-}
 
 #container {
 text-align:center;
