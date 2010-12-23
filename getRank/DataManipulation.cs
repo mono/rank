@@ -73,10 +73,10 @@ namespace getRank
 							if (name.ToLower().Contains("utf-8"))
 							{
 								name = email.Substring(0, email.IndexOf('@'));
-								name.Replace(".", " ");
 							}
 							
-							name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
+							name.Replace(".", " ");
+							name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 							
 							if (name.Contains(","))
 							{
@@ -84,7 +84,7 @@ namespace getRank
 								name = names[1] + " " + names[0];
 								name = name.Trim();
 							}
-							
+
 							User user;
 							name = UserName(email, name);
 							if (!UserExists(email, name))
