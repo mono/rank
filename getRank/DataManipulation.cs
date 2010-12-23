@@ -68,6 +68,12 @@ namespace getRank
 							string nameEmailLine = emailLines[i].Replace("From: ", "");
 							string name = nameEmailLine.Substring(0, nameEmailLine.IndexOf('<') - 1).Trim();
 							string email = nameEmailLine.Trim().Substring(name.Length, nameEmailLine.Length - name.Length).Replace("<", "").Replace(">", "").Trim();
+							
+							if (name.ToLower().Contains("utf-8"))
+							{
+								name = email.Substring(0, email.IndexOf('@'));
+							}
+							
 							User user;
 							name = UserName(email, name);
 							if (!UserExists(email, name))
