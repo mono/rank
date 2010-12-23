@@ -345,6 +345,7 @@ namespace getRank
 		{
 			email.Add(inEmail);
 			name = inName;
+			name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 		}
 		
 		/// <summary>
