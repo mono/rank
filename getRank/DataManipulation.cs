@@ -75,15 +75,15 @@ namespace getRank
 								name = email.Substring(0, email.IndexOf('@'));
 							}
 							
-							name.Replace(".", " ");
-							name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
-							
-							if (name.Contains(","))
-							{
-								string[] names = name.Split(',');
-								name = names[1] + " " + names[0];
-								name = name.Trim();
-							}
+//							name.Replace(".", " ");
+//							name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+//							
+//							if (name.Contains(","))
+//							{
+//								string[] names = name.Split(',');
+//								name = names[1] + " " + names[0];
+//								name = name.Trim();
+//							}
 
 							User user;
 							name = UserName(email, name);
@@ -345,7 +345,7 @@ namespace getRank
 		{
 			email.Add(inEmail);
 			name = inName;
-			name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
+//			name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 		}
 		
 		/// <summary>
