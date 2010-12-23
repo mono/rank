@@ -20,8 +20,17 @@ color:black;
 text-align:center;
 }
 
+tr.over td {
+background: #569CD3;
+color:black;
+text-align:center;
+}
 
-
+tr.out td {
+background: #CFE3F2;
+color:black;
+text-align:center;
+}
 
 td {
 padding-top: 10px;
