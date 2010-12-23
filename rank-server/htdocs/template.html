@@ -40,23 +40,23 @@ function Striping(row, number)
     }
 }
 
-function MouseOver(elm, elm2)
+function MouseOver(tablerow, captionRow)
 {
-	document.getElementById(elm).className = "over";
-	document.getElementById(elm2).className = "over";
+	document.getElementById(tablerow).className = "over";
+	document.getElementById(captionRow).className = "over";
 }
 
-function MouseOut(elm, elm2, number)
+function MouseOut(tablerow, captionRow, number)
 {
 	if (number%2 != 0)
 	{
-		document.getElementById(elm).className = "alt";
-		document.getElementById(elm2).className = "alt";
+		document.getElementById(tablerow).className = "alt";
+		document.getElementById(captionRow).className = "alt";
 	}
 	else
 	{
-		document.getElementById(elm).className = "out";
-		document.getElementById(elm2).className = "out";
+		document.getElementById(tablerow).className = "out";
+		document.getElementById(captionRow).className = "out";
 	}
 }
 
