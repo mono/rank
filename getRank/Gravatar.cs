@@ -40,15 +40,15 @@ namespace getRank
 		{
 			string hash = MD5();
 			string url = string.Format(BaseURL, hash, Size, Rating);
-			try
-			{
-				HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-				HttpWebResponse loWebResponse = (HttpWebResponse)req.GetResponse();
-			}
-			catch
-			{
-				return "img/monkey.png";
-			}
+//			try
+//			{
+//				HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+//				HttpWebResponse loWebResponse = (HttpWebResponse)req.GetResponse();
+//			}
+//			catch
+//			{
+//				return "img/monkey.png";
+//			}
 			return url;
 		}
 		
