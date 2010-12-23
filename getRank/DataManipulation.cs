@@ -13,6 +13,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace getRank
 {
@@ -66,12 +67,22 @@ namespace getRank
 						if (dtDate > start_date)
 						{
 							string nameEmailLine = emailLines[i].Replace("From: ", "");
-							string name = nameEmailLine.Substring(0, nameEmailLine.IndexOf('<') - 1).Trim();
+							string name = nameEmailLine.Substring(0, nameEmailLine.IndexOf('<') - 1).Replace("\"", "").Trim();
 							string email = nameEmailLine.Trim().Substring(name.Length, nameEmailLine.Length - name.Length).Replace("<", "").Replace(">", "").Trim();
 							
 							if (name.ToLower().Contains("utf-8"))
 							{
 								name = email.Substring(0, email.IndexOf('@'));
+								name.Replace(".", " ");
+							}
+							
+							name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
+							
+							if (name.Contains(","))
+							{
+								string[] names = name.Split(',');
+								name = names[1] + " " + names[0];
+								name = name.Trim();
 							}
 							
 							User user;
