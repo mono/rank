@@ -89,7 +89,7 @@ namespace getRank
 				data += ReplaceKeywords(projData, user, rank)
 					.Replace("<!-- Project -->", proj.name)
 					.Replace("<!-- projCode -->", "+" + proj.CodeAdded.ToString() + " -" + proj.CodeRemoved.ToString())
-					.Replace("<!-- RedPercent -->", proj.RedPercent().ToString());
+					.Replace("<!-- BluePercent -->", proj.BluePercent().ToString());
 			}
 			
 			for (int i = 0; i < (4 - user.projects.Count); i++)

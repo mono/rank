@@ -492,9 +492,9 @@ namespace getRank
 		private int codeRemoved = 0;
 		private List<string> commits = new List<string>();
 		
-		internal int RedPercent()
+		internal int BluePercent()
 		{
-			return (codeRemoved * 100) / (codeRemoved + codeAdded);
+			return (codeAdded * 100) / (codeRemoved + codeAdded);
 		}
 		
 		/// <summary>
