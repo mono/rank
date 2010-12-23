@@ -39,6 +39,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DataManipulation.cs" />
     <Compile Include="HtmlOut.cs" />
+    <Compile Include="Gravatar.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
