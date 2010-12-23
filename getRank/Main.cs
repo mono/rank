@@ -9,6 +9,7 @@
 
 using System;
 using System.IO;
+using System.Threading;
 
 namespace getRank
 {
@@ -69,6 +70,10 @@ namespace getRank
 				{
 					if (ranks[i] != null)
 					{
+						if (i%10 == 0)
+						{
+							Thread.Sleep(35000);
+						}
 						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));
 						string emails = "";
 						foreach (string email in ranks[i].email)
