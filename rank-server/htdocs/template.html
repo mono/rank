@@ -15,13 +15,15 @@ function displayRow(row){
 	else row.style.display = '';
 }
 
-//This function gets the picture of the avatar for each user name
-function getAvatarURL(elm, email)
+
+function CheckGravatar(elm)
 {
-var base = "http://www.gravatar.com/avatar/";
-var hash = MD5(email);
-var fullUrl = base+hash +".jpg";
-document.getElementById(elm).src = fullUrl;
+	document.getElementById(elm).onerror = ImageDoesntExist(elm);
+}
+
+function ImageDoesntExist(elm)
+{
+	document.getElementById(elm).src = "img/monkey.png";
 }
 
 //This function draws the percentage bar
@@ -130,9 +132,9 @@ function Striping(row, number)
 	      <tr id = "tablerow<!-- rank -->">
 		 <script language= "JavaScript">Striping('tablerow<!-- rank -->', <!-- rank -->);</script>
 		 <td><img src="<!-- Gravatar -->" id="avatarimg<!-- rank -->" src="" style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" ></img></td>
-		    <!-- <script type="text/javascript"> -->
-      			<!-- window.onload = getAvatarURL('avatarimg<!-- rank -->', '<!-- email -->'); -->
-	 	    <!-- </script> -->
+		    <script type="text/javascript">
+      			window.onload = CheckGravatar('avatarimg<!-- rank -->');
+	 	    </script>
 		</td>
 	         <td><!-- name --></td>
                  <td><img src="img/<!-- Image -->" title="<!-- score -->" alt="bunch of bananas" class = "tooltip"></img></td>
