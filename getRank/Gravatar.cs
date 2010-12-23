@@ -9,6 +9,7 @@
 
 using System;
 using System.Net;
+using System.Threading;
 using System.Security.Cryptography;
 
 namespace getRank
@@ -42,9 +43,10 @@ namespace getRank
 			string url = string.Format(BaseURL, hash, Size, Rating);
 			Uri urlCheck = new Uri(url);
 			WebRequest request = WebRequest.Create(urlCheck);
-			request.Timeout = 15000;
+			request.Timeout = 1000;
 			try
 			{
+				Thread.Sleep(1000);
 				WebResponse response = request.GetResponse();
 			}
 			catch
