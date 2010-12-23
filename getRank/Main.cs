@@ -70,10 +70,10 @@ namespace getRank
 				{
 					if (ranks[i] != null)
 					{
-						if (i!= 0 && i%10 == 0)
-						{
-							Thread.Sleep(35000);
-						}
+//						if (i!= 0 && i%10 == 0)
+//						{
+//							Thread.Sleep(35000);
+//						}
 						writer.Write(HtmlOut.UserRank(ranks[i], i + 1));
 						string emails = "";
 						foreach (string email in ranks[i].email)

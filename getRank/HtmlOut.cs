@@ -103,7 +103,7 @@ namespace getRank
 		
 		private static string ReplaceKeywords(string html, User user, int rank)
 		{
-			Gravatar img = new Gravatar(user.email[0], Gravatar.Ratings.g, 50);
+			Gravatar img = new Gravatar(user.email[0], Gravatar.IconSets.monsterid, Gravatar.Ratings.g, 50);
 			string gravatar = img.GravatarURL();
 			return html.Replace("<!-- rank -->", rank.ToString())
 				.Replace("<!-- name -->", user.name)

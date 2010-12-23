@@ -16,23 +16,30 @@ namespace getRank
 {
 	public class Gravatar
 	{
-		private string BaseURL = "http://www.gravatar.com/avatar/{0}?default=404&s={1}&r={2}";
+		private string BaseURL = "http://www.gravatar.com/avatar/{0}?d={1}&s={2}&r={3}";
 		
 		private string Email {get; set;}
 		private Ratings Rating {get; set;}
 		private int Size {get; set;}
+		private IconSets IconSet {get; set;}
 		
 		public enum Ratings
         {
             g, pg, r, x
         }
 		
-		public Gravatar (string email, Ratings rating, int size)
+		public Gravatar (string email, IconSets iconset, Ratings rating, int size)
 		{
 			Email = email;
+			IconSet = iconset;
 			Rating = rating;
 			Size = size;
 		}
+		
+        public enum IconSets
+        {
+            identicon, monsterid, wavatar
+        }
 		
 		/// <summary>
 		/// Return the URL hash of the user's Gravatar image.
@@ -40,19 +47,19 @@ namespace getRank
 		public string GravatarURL()
 		{
 			string hash = MD5();
-			string url = string.Format(BaseURL, hash, Size, Rating);
-			Uri urlCheck = new Uri(url);
-			WebRequest request = WebRequest.Create(urlCheck);
-			request.Timeout = 1000;
-			try
-			{
-				Thread.Sleep(1000);
-				WebResponse response = request.GetResponse();
-			}
-			catch
-			{
-				return "img/monkey.png";
-			}
+			string url = string.Format(BaseURL, hash, IconSet, Size, Rating);
+//			Uri urlCheck = new Uri(url);
+//			WebRequest request = WebRequest.Create(urlCheck);
+//			request.Timeout = 1000;
+//			try
+//			{
+//				Thread.Sleep(1000);
+//				WebResponse response = request.GetResponse();
+//			}
+//			catch
+//			{
+//				return "img/monkey.png";
+//			}
 			return url;
 		}
 		
