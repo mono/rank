@@ -8,6 +8,7 @@
 // 
 
 using System;
+using System.Net;
 using System.Security.Cryptography;
 
 namespace getRank
@@ -38,7 +39,17 @@ namespace getRank
 		public string GravatarURL()
 		{
 			string hash = MD5();
-			return string.Format(BaseURL, hash, Size, Rating);
+			string url = string.Format(BaseURL, hash, Size, Rating);
+			try
+			{
+				HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+				HttpWebResponse loWebResponse = (HttpWebResponse)req.GetResponse();
+			}
+			catch
+			{
+				return "img/monkey.png";
+			}
+			return url;
 		}
 		
 		/// <summary>
