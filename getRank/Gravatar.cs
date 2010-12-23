@@ -42,7 +42,7 @@ namespace getRank
 			string url = string.Format(BaseURL, hash, Size, Rating);
 			Uri urlCheck = new Uri(url);
 			WebRequest request = WebRequest.Create(urlCheck);
-			request.Timeout = 1000;
+			request.Timeout = 15000;
 			try
 			{
 				WebResponse response = request.GetResponse();
