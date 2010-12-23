@@ -70,7 +70,7 @@ namespace getRank
 				{
 					if (ranks[i] != null)
 					{
-						if (i%10 == 0)
+						if (i!= 0 && i%10 == 0)
 						{
 							Thread.Sleep(35000);
 						}
