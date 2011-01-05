@@ -65,7 +65,7 @@ namespace getRank
 				HtmlOut.Template();
 				writer.Write(HtmlOut.header);
 			
-				User[] ranks = manipulator.UserRanks();
+				Users[] ranks = manipulator.UserRanks();
 				for (int i = 0; i <= ranks.Length - 1; i++)
 				{
 					if (ranks[i] != null)

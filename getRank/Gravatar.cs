@@ -48,18 +48,6 @@ namespace getRank
 		{
 			string hash = MD5();
 			string url = string.Format(BaseURL, hash, IconSet, Size, Rating);
-//			Uri urlCheck = new Uri(url);
-//			WebRequest request = WebRequest.Create(urlCheck);
-//			request.Timeout = 1000;
-//			try
-//			{
-//				Thread.Sleep(1000);
-//				WebResponse response = request.GetResponse();
-//			}
-//			catch
-//			{
-//				return "img/monkey.png";
-//			}
 			return url;
 		}
 		

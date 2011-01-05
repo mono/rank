@@ -33,6 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="Mono.Data.Sqlite" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -40,6 +44,8 @@
     <Compile Include="DataManipulation.cs" />
     <Compile Include="HtmlOut.cs" />
     <Compile Include="Gravatar.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="data.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

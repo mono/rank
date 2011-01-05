@@ -19,7 +19,7 @@ namespace getRank
 {
 	public class DataManipulation
 	{
-		internal List<User> users = new List<User>();
+		internal List<Users> users = new List<Users>();
 		
 		public DataManipulation (string directory, string start_date)
 		{
@@ -76,7 +76,6 @@ namespace getRank
 							}
 							
 							name.Replace(".", " ");
-//							name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 							
 							if (name.Contains(","))
 							{
@@ -85,11 +84,11 @@ namespace getRank
 								name = name.Trim();
 							}
 
-							User user;
+							Users user;
 							name = UserName(email, name);
 							if (!UserExists(email, name))
 							{
-								user = new User(email, name);
+								user = new Users(email, name);
 								users.Add(user);
 							}
 							else
@@ -187,7 +186,7 @@ namespace getRank
 			chars[0] = '\r';
 			chars[1] = '\n';
 			string[] sdata = data.Split(chars);
-			User previousUser = new User("", "");
+			Users previousUser = new Users("", "");
 
 			foreach (string line in sdata)
 			{
@@ -217,7 +216,7 @@ namespace getRank
 					}
 					else
 					{
-						User aUser = new User(user[2], user[1]);
+						Users aUser = new Users(user[2], user[1]);
 						users.Add(aUser);
 						aUser.AddCommit(user[0], project);
 						previousUser = aUser;
@@ -235,10 +234,10 @@ namespace getRank
 		/// <returns>
 		/// The user's object<see cref="User"/>
 		/// </returns>
-		private User iUser(string email)
+		private Users iUser(string email)
 		{
-			User iuser = null;
-			foreach (User user in users)
+			Users iuser = null;
+			foreach (Users user in users)
 			{
 				if (user.email.Contains(email))
 				{
@@ -265,7 +264,7 @@ namespace getRank
 		private bool UserExists(string email, string name)
 		{
 			bool exists = false;
-			foreach (User user in users)
+			foreach (Users user in users)
 			{
 				string new_name = name.Split()[0] + name.Split()[name.Split().Length - 1];
 				string existing_name = user.name.Split()[0] + user.name.Split()[user.name.Split().Length - 1];
@@ -285,7 +284,7 @@ namespace getRank
 		private string UserName(string email, string defaultname)
 		{
 			string name = defaultname;
-			foreach (User user in users)
+			foreach (Users user in users)
 			{
 				if (user.email.Contains(email))
 				{
@@ -301,16 +300,16 @@ namespace getRank
 		/// <returns>
 		/// Sorted array of Users <see cref="User[]"/>
 		/// </returns>
-		internal User[] UserRanks()
+		internal Users[] UserRanks()
 		{
 			int STOP = users.Count - 1;
-			User[] ranks = new User[users.Count];
+			Users[] ranks = new Users[users.Count];
 			
 			for (int i = 0; i <= STOP; i++)
 			{
 				int score = 0;
-				User highRanking = null;
-				foreach (User user in users)
+				Users highRanking = null;
+				foreach (Users user in users)
 				{
 					if (user.Score() >= score)
 					{
@@ -325,11 +324,11 @@ namespace getRank
 		}
 	}
 	
-	internal class User
+	internal class Users
 	{
 		internal List<string> email = new List<string>();
 		internal string name {get; set;}
-		internal List<Project> projects = new List<Project>();
+		internal List<Projects> projects = new List<Projects>();
 		internal int mailingListMessages = 0;
 		
 		/// <summary>
@@ -341,11 +340,10 @@ namespace getRank
 		/// <param name="inName">
 		/// User's name <see cref="System.String"/>
 		/// </param>
-		internal User(string inEmail, string inName)
+		internal Users(string inEmail, string inName)
 		{
 			email.Add(inEmail);
 			name = inName;
-//			name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name.ToLower());
 		}
 		
 		/// <summary>
@@ -388,7 +386,7 @@ namespace getRank
 		internal int CommitCount()
 		{
 			int count = 0;
-			foreach (Project proj in projects)
+			foreach (Projects proj in projects)
 			{
 				count += proj.CommitCount();
 			}
@@ -414,7 +412,7 @@ namespace getRank
 		internal int CodeCurved()
 		{
 			int code = 0;
-			foreach (Project proj in projects)
+			foreach (Projects proj in projects)
 			{
 				code += proj.CodeCurved;
 			}
@@ -438,7 +436,7 @@ namespace getRank
 		internal int CodeAdded()
 		{
 			int code = 0;
-			foreach (Project proj in projects)
+			foreach (Projects proj in projects)
 			{
 				code += proj.CodeAdded;
 			}
@@ -459,7 +457,7 @@ namespace getRank
 		internal int CodeRemoved()
 		{
 			int code = 0;
-			foreach (Project proj in projects)
+			foreach (Projects proj in projects)
 			{
 				code += proj.CodeRemoved;
 			}
@@ -469,22 +467,22 @@ namespace getRank
 		/// <summary>
 		/// Find the Project, else create the project.
 		/// </summary>
-		internal Project GetProject(string project)
+		internal Projects GetProject(string project)
 		{
-			foreach (Project proj in projects)
+			foreach (Projects proj in projects)
 			{
 				if (proj.name == project)
 				{
 					return proj;
 				}
 			}
-			Project temp = new Project(project);
+			Projects temp = new Projects(project);
 			projects.Add(temp);
 			return temp;
 		}
 	}
 	
-	internal class Project
+	internal class Projects
 	{
 		internal string name;
 		private int codeCurved = 0;
@@ -548,7 +546,7 @@ namespace getRank
 		/// <param name="project">
 		/// The Project name <see cref="System.String"/>
 		/// </param>
-		internal Project(string project)
+		internal Projects(string project)
 		{
 			name = project;
 		}

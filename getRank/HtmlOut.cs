@@ -81,10 +81,10 @@ namespace getRank
 		/// <returns>
 		/// The html string representing the user <see cref="System.String"/>
 		/// </returns>
-		internal static string UserRank(User user, int rank)
+		internal static string UserRank(Users user, int rank)
 		{
 			string data = ReplaceKeywords(userHeader, user, rank);
-			foreach (Project proj in user.projects)
+			foreach (Projects proj in user.projects)
 			{
 				data += ReplaceKeywords(projData, user, rank)
 					.Replace("<!-- Project -->", proj.name)
@@ -101,7 +101,7 @@ namespace getRank
 			return data;
 		}
 		
-		private static string ReplaceKeywords(string html, User user, int rank)
+		private static string ReplaceKeywords(string html, Users user, int rank)
 		{
 			Gravatar img = new Gravatar(user.email[0], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
 			string gravatar = img.GravatarURL();
@@ -115,7 +115,7 @@ namespace getRank
 				.Replace("<!-- commits -->", user.CommitCount().ToString());
 		}
 		
-		private static string ReplaceImageName(User user)
+		private static string ReplaceImageName(Users user)
 		{
 			int GROVE = 50000;
 			int TREE = 5000;
