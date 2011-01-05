@@ -1,0 +1,1 @@
+To contribute, you'll first need to run the sqlmetal.sh script found in the getRank directory prior to opening the mono solution. This script generates the database connector.
