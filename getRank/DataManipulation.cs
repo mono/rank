@@ -27,7 +27,7 @@ namespace getRank
 			DateTime start = GetStartDate(start_date);
 			GetDirectoryStructure(directory, start);
 			GetMailingListData(start);
-			
+			GetBugzillaData(start);
 		}
 		
 		/// <summary>
@@ -118,16 +118,28 @@ namespace getRank
 		
 		private void GetBugzillaData(DateTime start_date)
 		{
+			//Queue<string> emailData = new Queue<string>();
 			string emails = GetMailingListEmails("bugzilla");
 			string[] splitValue = new string[1];
 			splitValue[0] = "\n";
 			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
 			DateTime dtDate = new DateTime();
 			
-			for (int i = 0; i < emailLines.Length; i++)
+			List<string> messages = new List<string>();
+			foreach (string line in emailLines)
 			{
-				
+				if (line.Contains("_______________________________________________"))
+				{
+
+				} else if ((line.Contains("From ") && line.Contains("@lists.ximian.com"))
+					    || line.Contains("https://bugzilla.novell.com/show_bug.cgi?id=")
+					    || line.Contains("Status|")
+					    || line.Contains(" changed:"))
+				{
+					emailData.Enqueue(line);
+				}
 			}
+
 		}
 		
 		private string GetMailingListEmails(string list)
