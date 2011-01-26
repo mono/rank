@@ -25,13 +25,16 @@ namespace getRank
 			db.User.InsertOnSubmit(aUser);
 			foreach (Projects proj in user.projects)
 			{
-				AddProject(proj);
+				AddProject(proj, aUser.ProjID);
 			}
 		}
 		
-		static void AddProject(Projects project)
+		static void AddProject(Projects project, int id)
 		{
-			
+			Project aProj = new Project();
+			aProj.ProjName = project.name;
+			aProj.AddressID = id;
+			db.Project.InsertOnSubmit(aProj);
 		}
 		
 	}

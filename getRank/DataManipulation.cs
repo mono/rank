@@ -23,9 +23,19 @@ namespace getRank
 		
 		public DataManipulation (string directory, string start_date)
 		{
+			GetDatabaseData();
 			DateTime start = GetStartDate(start_date);
 			GetDirectoryStructure(directory, start);
 			GetMailingListData(start);
+			
+		}
+		
+		/// <summary>
+		/// Retrieves data from the database.
+		/// </summary>
+		private void GetDatabaseData()
+		{
+			
 		}
 		
 		private DateTime GetStartDate(string start_date)
@@ -47,7 +57,7 @@ namespace getRank
 		/// </summary>
 		private void GetMailingListData(DateTime start_date)
 		{
-			string emails = GetMailingListEmails();
+			string emails = GetMailingListEmails("monolists");
 			string[] splitValue = new string[1];
 			splitValue[0] = "\n";
 			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
@@ -88,7 +98,7 @@ namespace getRank
 							name = UserName(email, name);
 							if (!UserExists(email, name))
 							{
-								user = new Users(email, name);
+								user = new Users(email, name, false);
 								users.Add(user);
 							}
 							else
@@ -106,11 +116,25 @@ namespace getRank
 			}
 		}
 		
-		private string GetMailingListEmails()
+		private void GetBugzillaData(DateTime start_date)
+		{
+			string emails = GetMailingListEmails("bugzilla");
+			string[] splitValue = new string[1];
+			splitValue[0] = "\n";
+			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
+			DateTime dtDate = new DateTime();
+			
+			for (int i = 0; i < emailLines.Length; i++)
+			{
+				
+			}
+		}
+		
+		private string GetMailingListEmails(string list)
 		{
 			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
 			StreamReader read;
-			read = File.OpenText(homePath + "/monolists");
+			read = File.OpenText(homePath + "/" + list);
 			string emails = "";
 			while (!read.EndOfStream)
 			{
@@ -186,7 +210,7 @@ namespace getRank
 			chars[0] = '\r';
 			chars[1] = '\n';
 			string[] sdata = data.Split(chars);
-			Users previousUser = new Users("", "");
+			Users previousUser = new Users();
 
 			foreach (string line in sdata)
 			{
@@ -216,7 +240,7 @@ namespace getRank
 					}
 					else
 					{
-						Users aUser = new Users(user[2], user[1]);
+						Users aUser = new Users(user[2], user[1], false);
 						users.Add(aUser);
 						aUser.AddCommit(user[0], project);
 						previousUser = aUser;
@@ -331,6 +355,10 @@ namespace getRank
 		internal List<Projects> projects = new List<Projects>();
 		internal int mailingListMessages = 0;
 		
+		internal bool Present {get; set;}
+		
+		internal Users(){Present = false;}
+		
 		/// <summary>
 		/// Sets the user information.
 		/// </summary>
@@ -340,10 +368,11 @@ namespace getRank
 		/// <param name="inName">
 		/// User's name <see cref="System.String"/>
 		/// </param>
-		internal Users(string inEmail, string inName)
+		internal Users(string inEmail, string inName, bool present)
 		{
 			email.Add(inEmail);
 			name = inName;
+			Present = present;
 		}
 		
 		/// <summary>
