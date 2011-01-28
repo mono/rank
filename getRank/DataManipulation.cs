@@ -28,6 +28,17 @@ namespace getRank
 			GetDirectoryStructure(directory, start);
 			GetMailingListData(start);
 			GetBugzillaData(start);
+			
+			//database test
+//			Users user = new Users("fred.flinstone@novell.com", "Fred Flinstone", false);
+//			Projects project = new Projects("mono");
+//			project.CodeAdded = 5;
+//			project.CodeRemoved = 5;
+//			project.CodeCurved = 0;
+//			project.AddCommit("blahblah");
+//			user.projects.Add(project);
+//			Database.AddUser(user);
+			
 		}
 		
 		/// <summary>
@@ -103,9 +114,9 @@ namespace getRank
 							}
 							else
 							{
-								user = iUser(email);
+								user = GetUser(email);
 							}
-							user.MailingListMessages(1);
+							user.MailingListMessages++;
 						}	
 					}
 				}
@@ -116,30 +127,100 @@ namespace getRank
 			}
 		}
 		
+		/// <summary>
+		/// Parses the messages from bugzilla and inserts the data into the user list.
+		/// </summary>
+		/// <param name="start_date">
+		/// The date to begin using data<see cref="DateTime"/>
+		/// </param>
 		private void GetBugzillaData(DateTime start_date)
 		{
-			//Queue<string> emailData = new Queue<string>();
-			string emails = GetMailingListEmails("bugzilla");
-			string[] splitValue = new string[1];
-			splitValue[0] = "\n";
-			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
-			DateTime dtDate = new DateTime();
+			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+			StreamReader read;
+			read = File.OpenText(homePath + "/bugzilla");
 			
-			List<string> messages = new List<string>();
-			foreach (string line in emailLines)
+			List<Users> users = new List<Users>();
+			Users user = new Users();
+			users.Add(user);
+			while (!read.EndOfStream)
 			{
+				string line = read.ReadLine();
 				if (line.Contains("_______________________________________________"))
 				{
-
-				} else if ((line.Contains("From ") && line.Contains("@lists.ximian.com"))
-					    || line.Contains("https://bugzilla.novell.com/show_bug.cgi?id=")
-					    || line.Contains("Status|")
-					    || line.Contains(" changed:"))
+					user = new Users();
+					users.Add(user);
+				}
+				else if (line.Contains("From ") && line.Contains("@lists.ximian.com"))
 				{
-					emailData.Enqueue(line);
+					string date = line.Substring(line.IndexOf(' ', 5)).Trim();
+					string[] splitDate = date.Split(' ');
+					date = splitDate[1] + " " + splitDate[2] + " " + splitDate[4];
+					try
+					{
+						if (DateTime.Parse(date) < start_date)
+						{
+							users.Remove(user);
+						}
+					}
+					catch {}
+				}
+				else if (line.Contains("https://bugzilla.novell.com/show_bug.cgi?id="))
+				{
+					string bugID = line.Replace("https://bugzilla.novell.com/show_bug.cgi?id=", "");
+					string[] bugIDParse = bugID.Split('#');
+					user.BugsWorked(bugIDParse[0]);
+				}
+				else if (line.Contains("Status|"))
+				{
+					string status = line.Split('|')[2];
+					if (status == "RESOLVED")
+					{
+						user.BugsClosed++;
+					}
+				}
+				else if (line.Contains(" changed:"))
+				{
+					try
+					{
+						string name = line.Substring(0, line.IndexOf('<'));
+						user.Name = name;
+						string email = line.Split('<')[1];
+						email = email.Substring(0, email.IndexOf('>'));
+						user.email.Add(email);
+					}
+					catch{}
+				}
+				else if (line.Contains("--- Comment #"))
+				{
+					try
+					{
+						string name = line.Remove(0, line.IndexOf("from") + 5);
+						name = name.Substring(0, name.IndexOf('<')).Trim();
+						user.Name = name;
+						string email = line.Split('<')[1];
+						email = email.Substring(0, email.IndexOf('>'));
+						user.email.Add(email);
+					}
+					catch{}
 				}
 			}
-
+			read.Close();
+			
+			foreach (Users user2 in users)
+			{
+				if (user2.email.Count != 0)
+				{
+					if (UserExists(user2.email[0], user2.Name))
+					{
+						user = GetUser(user2.email[0]);
+						user.BugsClosed += user2.BugsClosed;
+						foreach (string bug in user2.BugsWorked())
+						{
+							user.BugsWorked(bug);
+						}
+					}
+				}
+			}
 		}
 		
 		private string GetMailingListEmails(string list)
@@ -152,7 +233,7 @@ namespace getRank
 			{
 				emails += read.ReadLine() + Environment.NewLine;
 			}
-			
+			read.Close();
 			return emails;
 		}
 		
@@ -247,8 +328,8 @@ namespace getRank
 					string[] user = line.Split(';');
 					if (UserExists(user[2], user[1]))
 					{
-						iUser(user[2]).AddCommit(user[0], project);
-						previousUser = iUser(user[2]);
+						GetUser(user[2]).AddCommit(user[0], project);
+						previousUser = GetUser(user[2]);
 					}
 					else
 					{
@@ -270,7 +351,7 @@ namespace getRank
 		/// <returns>
 		/// The user's object<see cref="User"/>
 		/// </returns>
-		private Users iUser(string email)
+		private Users GetUser(string email)
 		{
 			Users iuser = null;
 			foreach (Users user in users)
@@ -303,7 +384,7 @@ namespace getRank
 			foreach (Users user in users)
 			{
 				string new_name = name.Split()[0] + name.Split()[name.Split().Length - 1];
-				string existing_name = user.name.Split()[0] + user.name.Split()[user.name.Split().Length - 1];
+				string existing_name = user.Name.Split()[0] + user.Name.Split()[user.Name.Split().Length - 1];
 				if (user.email.Contains(email) && existing_name == new_name)
 				{
 					exists = true;
@@ -317,6 +398,18 @@ namespace getRank
 			return exists;
 		}
 		
+		/// <summary>
+		/// Returns a user's name if it is found in the list of users, otherwise returns the default.
+		/// </summary>
+		/// <param name="email">
+		/// The users email address<see cref="System.String"/>
+		/// </param>
+		/// <param name="defaultname">
+		/// A default to return if the name is not found<see cref="System.String"/>
+		/// </param>
+		/// <returns>
+		/// The users name<see cref="System.String"/>
+		/// </returns>
 		private string UserName(string email, string defaultname)
 		{
 			string name = defaultname;
@@ -324,7 +417,7 @@ namespace getRank
 			{
 				if (user.email.Contains(email))
 				{
-					name = user.name;
+					name = user.Name;
 				}
 			}
 			return name;
@@ -363,13 +456,18 @@ namespace getRank
 	internal class Users
 	{
 		internal List<string> email = new List<string>();
-		internal string name {get; set;}
 		internal List<Projects> projects = new List<Projects>();
-		internal int mailingListMessages = 0;
+		private List<string> bugsWorked = new List<string>();
 		
+		internal string Name {get; set;}
+		internal int MailingListMessages {get; set;}
+		internal int BugsClosed {get; set;}
 		internal bool Present {get; set;}
 		
-		internal Users(){Present = false;}
+		/// <summary>
+		/// Creates a new user that is not present in the database.
+		/// </summary>
+		internal Users(){Name = ""; Present = false;}
 		
 		/// <summary>
 		/// Sets the user information.
@@ -382,8 +480,10 @@ namespace getRank
 		/// </param>
 		internal Users(string inEmail, string inName, bool present)
 		{
+			MailingListMessages = 0;
+			BugsClosed = 0;
 			email.Add(inEmail);
-			name = inName;
+			Name = inName;
 			Present = present;
 		}
 		
@@ -399,26 +499,8 @@ namespace getRank
 				score = score * -1;
 			}
 			
-			score = ((score * CommitCount()) + (MailingListMessages() * 5));
+			score = ((score * CommitCount()) + (MailingListMessages * 5) + (BugsWorkedCount() * 15) + (BugsClosed * 20));
 			return score;
-		}
-		
-		/// <summary>
-		/// Returns the number of messages a user has contributed
-		/// in the mailing lists.
-		/// </summary>
-		internal int MailingListMessages()
-		{
-			return mailingListMessages;
-		}
-		
-		/// <summary>
-		/// Adds to the number of messages that the user has sent to
-		/// the mailing lists.
-		/// </summary>
-		internal void MailingListMessages(int count)
-		{
-			mailingListMessages += count;
 		}
 		
 		/// <summary>
@@ -520,6 +602,36 @@ namespace getRank
 			Projects temp = new Projects(project);
 			projects.Add(temp);
 			return temp;
+		}
+		
+		/// <summary>
+		/// Add a bug id, only if it hasn't already been added.
+		/// </summary>
+		/// <param name="bugid">
+		/// The bugs id <see cref="System.String"/>
+		/// </param>
+		internal void BugsWorked(string bugid)
+		{
+			if (!bugsWorked.Contains(bugid))
+			{
+				bugsWorked.Add(bugid);
+			}
+		}
+		
+		/// <summary>
+		/// The number of bugs worked on.
+		/// </summary>
+		/// <returns>
+		/// Number of bugs worked <see cref="System.Int32"/>
+		/// </returns>
+		internal int BugsWorkedCount()
+		{
+			return bugsWorked.Count;
+		}
+						
+		internal List<string> BugsWorked()
+		{
+			return bugsWorked;
 		}
 	}
 	

@@ -106,7 +106,7 @@ namespace getRank
 			Gravatar img = new Gravatar(user.email[0], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
 			string gravatar = img.GravatarURL();
 			return html.Replace("<!-- rank -->", rank.ToString())
-				.Replace("<!-- name -->", user.name)
+				.Replace("<!-- name -->", user.Name)
 				.Replace("<!-- code -->", user.CodeAdded().ToString())
 				.Replace("<!-- email -->", user.email[0])
 				.Replace("<!-- Gravatar -->", gravatar)

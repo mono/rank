@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
 using Mono.Data.Sqlite;
@@ -18,25 +19,54 @@ namespace getRank
 	        return new Main (conn);
 		}
 		
-		static void AddUser(Users user)
+		internal static void AddUser(Users user)
 		{
 			User aUser = new User();
-			aUser.Name = user.name;
+			aUser.UserName = user.Name;
 			db.User.InsertOnSubmit(aUser);
 			foreach (Projects proj in user.projects)
 			{
-				AddProject(proj, aUser.ProjID);
+				AddProject(proj, aUser);
 			}
+			foreach (string email in user.email)
+			{
+				AddEmailAddress(aUser, email);
+			}
+			db.SubmitChanges();
 		}
 		
-		static void AddProject(Projects project, int id)
+		private static void AddEmailAddress(User aUser, string email)
+		{
+			Address aAddress = new Address();
+			aAddress.AddID = aUser.AddID;
+			aAddress.Email = email;
+			db.Address.InsertOnSubmit(aAddress);
+		}
+		
+		private static void AddProject(Projects project, User aUser)
 		{
 			Project aProj = new Project();
 			aProj.ProjName = project.name;
-			aProj.AddressID = id;
+			aProj.ProjID = aUser.ProjID;
 			db.Project.InsertOnSubmit(aProj);
+			AddData(project, aProj);
 		}
 		
+		private static void AddData(Projects project, Project aProj)
+		{
+			Data aData = new Data();
+			aData.DataID = aProj.ProjID;
+			aData.CodeAdded = project.CodeAdded;
+			aData.CodeRemoved = project.CodeRemoved;
+			aData.CodeCurved = project.CodeCurved;
+			db.Data.InsertOnSubmit(aData);
+		}
+		
+//		internal static List<Users> RetrieveUser()
+//		{
+//			
+//			
+//		}
 	}
 }
 
