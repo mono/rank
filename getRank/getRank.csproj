@@ -21,7 +21,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
-    <Commandlineparameters>-d "/home/dmulder/code/rank/rank-server/Output" -g "/home/dmulder/mono" -t "/home/dmulder/code/rank/rank-server/htdocs/"</Commandlineparameters>
+    <Commandlineparameters>-d "/home/dmulder/code/rank/rank-server/Output" -g "/home/dmulder/mono" -t "/home/dmulder/code/rank/rank-server/htdocs/" -s "10/1/2010"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>

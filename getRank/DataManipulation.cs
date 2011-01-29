@@ -68,26 +68,27 @@ namespace getRank
 		/// </summary>
 		private void GetMailingListData(DateTime start_date)
 		{
-			string emails = GetMailingListEmails("monolists");
-			string[] splitValue = new string[1];
-			splitValue[0] = "\n";
-			string[] emailLines = emails.Split(splitValue, StringSplitOptions.RemoveEmptyEntries);
+			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+			StreamReader read;
+			read = File.OpenText(homePath + "/monolists");
+
 			DateTime dtDate = new DateTime();
 			
-			for (int i = 0; i < emailLines.Length; i++)
+			while (!read.EndOfStream)
 			{
+				string line = read.ReadLine();
 				try
 				{
-					if (emailLines[i].Contains("Date: "))
+					if (line.Contains("Date: "))
 					{
-						string date = emailLines[i].Replace("Date: ", "").Substring(5, 11);
+						string date = line.Replace("Date: ", "").Substring(5, 11);
 						dtDate = DateTime.Parse(date);
 					}
-					else if (emailLines[i].Contains("From: "))
+					else if (line.Contains("From: "))
 					{
 						if (dtDate > start_date)
 						{
-							string nameEmailLine = emailLines[i].Replace("From: ", "");
+							string nameEmailLine = line.Replace("From: ", "");
 							string name = nameEmailLine.Substring(0, nameEmailLine.IndexOf('<') - 1).Replace("\"", "").Trim();
 							string email = nameEmailLine.Trim().Substring(name.Length, nameEmailLine.Length - name.Length).Replace("<", "").Replace(">", "").Trim();
 							
@@ -221,20 +222,6 @@ namespace getRank
 					}
 				}
 			}
-		}
-		
-		private string GetMailingListEmails(string list)
-		{
-			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-			StreamReader read;
-			read = File.OpenText(homePath + "/" + list);
-			string emails = "";
-			while (!read.EndOfStream)
-			{
-				emails += read.ReadLine() + Environment.NewLine;
-			}
-			read.Close();
-			return emails;
 		}
 		
 		/// <summary>

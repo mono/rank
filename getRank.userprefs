@@ -2,17 +2,18 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="getRank/DataManipulation.cs">
     <Files>
-      <File FileName="getRank/Main.cs" Line="20" Column="1" />
-      <File FileName="getRank/DataManipulation.cs" Line="120" Column="4" />
-      <File FileName="getRank/HtmlOut.cs" Line="52" Column="29" />
+      <File FileName="getRank/Main.cs" Line="40" Column="14" />
+      <File FileName="getRank/DataManipulation.cs" Line="95" Column="1" />
+      <File FileName="getRank/HtmlOut.cs" Line="30" Column="22" />
       <File FileName="getRank/Gravatar.cs" Line="25" Column="3" />
-      <File FileName="getRank/Database.cs" Line="1" Column="1" />
+      <File FileName="getRank/Database.cs" Line="36" Column="4" />
+      <File FileName="getRank/data.cs" Line="433" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="getRank" expanded="True">
-            <Node name="DataManipulation.cs" selected="True" />
+          <Node name="getRank" expanded="True" selected="True">
+            <Node name="References" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -26,11 +27,14 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/home/dmulder/code/rank/getRank/DataManipulation.cs" line="30" />
+      <Breakpoint file="/home/dmulder/code/rank/getRank/Database.cs" line="35" />
+      <Breakpoint file="/home/dmulder/code/rank/getRank/DataManipulation.cs" line="95" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
     <Watch file="getRank/DataManipulation.cs" line="67" offsetX="662" offsetY="768" expression="user" liveUpdate="False" />
     <Watch file="getRank/DataManipulation.cs" line="20" offsetX="503" offsetY="176" expression="users" liveUpdate="False" />
+    <Watch file="getRank/Database.cs" line="26" offsetX="396" offsetY="400" expression="db" liveUpdate="False" />
+    <Watch file="getRank/DataManipulation.cs" line="142" offsetX="472" offsetY="1840" expression="users" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>
