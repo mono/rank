@@ -14,6 +14,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace getRank
 {
@@ -28,6 +29,8 @@ namespace getRank
 			GetDirectoryStructure(directory, start);
 			GetMailingListData(start);
 			GetBugzillaData(start);
+			RemoveJunk();
+			WriteDatabaseData();
 			
 			//database test
 //			Users user = new Users("fred.flinstone@novell.com", "Fred Flinstone", false);
@@ -47,6 +50,53 @@ namespace getRank
 		private void GetDatabaseData()
 		{
 			
+		}
+		
+		private void WriteDatabaseData()
+		{
+			
+		}
+		
+		/// <summary>
+		/// Parse out junk from the retrieved data.
+		/// </summary>
+		private void RemoveJunk()
+		{
+			Regex emailMatch = new Regex(@"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$");
+			List<Users> badUsers = new List<Users>();
+			foreach (Users user in users)
+			{
+				//Remove e-mails that weren't parsed correctly
+				List<string> badEmails = new List<string>();
+				foreach (string email in user.email)
+				{
+					if (!emailMatch.IsMatch(email))
+					{
+						badEmails.Add(email);
+					}
+				}
+				foreach (string email in badEmails)
+				{
+					user.email.Remove(email);
+				}
+				
+				if (user.email.Count == 0)
+				{
+					badUsers.Add(user);
+				}
+				else if (user.Name.Contains("="))//Fix names that weren't parsed correctly
+				{
+					user.Name = user.email[0].Split('@')[0];
+				}
+				else if (user.Name.Contains(">"))
+				{
+					user.Name = user.Name.Replace(">", "").Trim();
+				}
+			}
+			foreach (Users user in badUsers)
+			{
+				users.Remove(user);
+			}
 		}
 		
 		private DateTime GetStartDate(string start_date)
@@ -77,14 +127,18 @@ namespace getRank
 			while (!read.EndOfStream)
 			{
 				string line = read.ReadLine();
-				try
+				if (line.Contains("Date: "))
 				{
-					if (line.Contains("Date: "))
+					try
 					{
 						string date = line.Replace("Date: ", "").Substring(5, 11);
 						dtDate = DateTime.Parse(date);
 					}
-					else if (line.Contains("From: "))
+					catch(Exception e){Console.WriteLine(e.Message);}
+				}
+				else if (line.Contains("From: "))
+				{
+					try
 					{
 						if (dtDate > start_date)
 						{
@@ -118,12 +172,9 @@ namespace getRank
 								user = GetUser(email);
 							}
 							user.MailingListMessages++;
-						}	
+						}
 					}
-				}
-				catch(Exception e)
-				{
-					Console.WriteLine(e.Message);
+					catch(Exception e){Console.WriteLine(e.Message);}
 				}
 			}
 		}
@@ -163,7 +214,7 @@ namespace getRank
 							users.Remove(user);
 						}
 					}
-					catch {}
+					catch(Exception e){Console.WriteLine(e.Message);}
 				}
 				else if (line.Contains("https://bugzilla.novell.com/show_bug.cgi?id="))
 				{
@@ -189,7 +240,7 @@ namespace getRank
 						email = email.Substring(0, email.IndexOf('>'));
 						user.email.Add(email);
 					}
-					catch{}
+					catch(Exception e){Console.WriteLine(e.Message);}
 				}
 				else if (line.Contains("--- Comment #"))
 				{
@@ -202,7 +253,7 @@ namespace getRank
 						email = email.Substring(0, email.IndexOf('>'));
 						user.email.Add(email);
 					}
-					catch{}
+					catch(Exception e){Console.WriteLine(e.Message);}
 				}
 			}
 			read.Close();
