@@ -31,17 +31,6 @@ namespace getRank
 			GetBugzillaData(start);
 			RemoveJunk();
 			WriteDatabaseData();
-			
-			//database test
-//			Users user = new Users("fred.flinstone@novell.com", "Fred Flinstone", false);
-//			Projects project = new Projects("mono");
-//			project.CodeAdded = 5;
-//			project.CodeRemoved = 5;
-//			project.CodeCurved = 0;
-//			project.AddCommit("blahblah");
-//			user.projects.Add(project);
-//			Database.AddUser(user);
-			
 		}
 		
 		/// <summary>
@@ -54,7 +43,11 @@ namespace getRank
 		
 		private void WriteDatabaseData()
 		{
-			
+			Database data = new Database();
+			foreach (Users user in users)
+			{
+				data.AddUser(user);
+			}
 		}
 		
 		/// <summary>
@@ -66,6 +59,11 @@ namespace getRank
 			List<Users> badUsers = new List<Users>();
 			foreach (Users user in users)
 			{
+				if (user.email.Count > 1 && user.email.Contains("miguel@gnome.org") && !user.Name.ToLower().Contains("miguel"))
+				{
+					user.email.Remove("miguel@gnome.org");
+				}
+				
 				//Remove e-mails that weren't parsed correctly
 				List<string> badEmails = new List<string>();
 				foreach (string email in user.email)

@@ -103,10 +103,6 @@ namespace getRank
 		
 		private static string ReplaceKeywords(string html, Users user, int rank)
 		{
-			if (user.email.Count > 1 && user.email.Contains("miguel@gnome.org") && !user.Name.ToLower().Contains("miguel"))
-			{
-				user.email.Remove("miguel@gnome.org");
-			}
 			Gravatar img = new Gravatar(user.email[0], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
 			string gravatar = img.GravatarURL();
 			return html.Replace("<!-- rank -->", rank.ToString())
