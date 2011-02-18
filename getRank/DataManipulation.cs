@@ -1,12 +1,11 @@
 //
 // DataManipulation.cs: Handles data recovery and manipulation of git and bugzilla data
 // in order to create commit and resolution rankings.
-// (Doesn't yet handle bugzilla data)
 //
 // Author:
 //   David Mulder (dmulder@novell.com)
 //
-// Copyright (C) 2010 Novell (http://www.novell.com)
+// Copyright (C) 2011 Novell (http://www.novell.com)
 // 
  
 using System;
@@ -20,7 +19,9 @@ namespace getRank
 {
 	public class DataManipulation
 	{
-		internal List<Users> users = new List<Users>();
+		private string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+		private List<Users> users;// = new List<Users>();
+		private Database data = new Database();
 		
 		public DataManipulation (string directory, string start_date)
 		{
@@ -38,12 +39,13 @@ namespace getRank
 		/// </summary>
 		private void GetDatabaseData()
 		{
-			
+			//List<Users> databaseUsers
+			users = data.RetrieveUsers();
 		}
 		
 		private void WriteDatabaseData()
 		{
-			Database data = new Database();
+			data.Clear();
 			foreach (Users user in users)
 			{
 				data.AddUser(user);
@@ -116,9 +118,8 @@ namespace getRank
 		/// </summary>
 		private void GetMailingListData(DateTime start_date)
 		{
-			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-			StreamReader read;
-			read = File.OpenText(homePath + "/monolists");
+			string listLocation = homePath + "/monolists";
+			StreamReader read = File.OpenText(listLocation);
 
 			DateTime dtDate = new DateTime();
 			
@@ -175,6 +176,10 @@ namespace getRank
 					catch(Exception e){Console.WriteLine(e.Message);}
 				}
 			}
+			read.Close();
+			StreamWriter empty = new StreamWriter(listLocation);
+			empty.Write("");
+			empty.Close();
 		}
 		
 		/// <summary>
@@ -185,9 +190,8 @@ namespace getRank
 		/// </param>
 		private void GetBugzillaData(DateTime start_date)
 		{
-			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-			StreamReader read;
-			read = File.OpenText(homePath + "/bugzilla");
+			string listLocation = homePath + "/bugzilla";
+			StreamReader read = File.OpenText(listLocation);
 			
 			List<Users> users = new List<Users>();
 			Users user = new Users();
@@ -255,6 +259,10 @@ namespace getRank
 				}
 			}
 			read.Close();
+			
+			StreamWriter empty = new StreamWriter(listLocation);
+			empty.Write("");
+			empty.Close();
 			
 			foreach (Users user2 in users)
 			{
@@ -498,12 +506,11 @@ namespace getRank
 		internal string Name {get; set;}
 		internal int MailingListMessages {get; set;}
 		internal int BugsClosed {get; set;}
-		internal bool Present {get; set;}
 		
 		/// <summary>
 		/// Creates a new user that is not present in the database.
 		/// </summary>
-		internal Users(){Name = ""; Present = false;}
+		internal Users(){Name = "";}
 		
 		/// <summary>
 		/// Sets the user information.
@@ -520,7 +527,6 @@ namespace getRank
 			BugsClosed = 0;
 			email.Add(inEmail);
 			Name = inName;
-			Present = present;
 		}
 		
 		/// <summary>
@@ -677,7 +683,7 @@ namespace getRank
 		private int codeCurved = 0;
 		private int codeAdded = 0;
 		private int codeRemoved = 0;
-		private List<string> commits = new List<string>();
+		internal List<string> commits = new List<string>();
 		
 		internal int BluePercent()
 		{

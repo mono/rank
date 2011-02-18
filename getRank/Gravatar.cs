@@ -4,7 +4,7 @@
 // Author:
 //   David Mulder (dmulder@novell.com)
 //
-// Copyright (C) 2010 Novell, Inc (www.novell.com)
+// Copyright (C) 2011 Novell, Inc (www.novell.com)
 // 
 
 using System;
