@@ -20,7 +20,7 @@ namespace getRank
 	public class DataManipulation
 	{
 		private string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-		private List<Users> users;// = new List<Users>();
+		private List<Users> users;
 		private Database data = new Database();
 		
 		public DataManipulation (string directory, string start_date)
@@ -39,7 +39,6 @@ namespace getRank
 		/// </summary>
 		private void GetDatabaseData()
 		{
-			//List<Users> databaseUsers
 			users = data.RetrieveUsers();
 		}
 		

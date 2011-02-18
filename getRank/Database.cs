@@ -21,10 +21,9 @@ namespace getRank
 		
 		static private SqliteConnection getDb()
 		{
-			SqliteConnection conn = new SqliteConnection (
-                "DbLinqProvider=Sqlite;" + 
-                "Data Source=MonoRankDatabase.sqlite"
-	        );
+			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) ? Environment.GetEnvironmentVariable("HOME") : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+			string connection = "DbLinqProvider=Sqlite; Data Source=\"" + homePath + "/MonoRankDatabase.sqlite\"";
+			SqliteConnection conn = new SqliteConnection (connection);
 	        return conn;
 		}
 		
