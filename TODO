@@ -19,3 +19,6 @@ Meeting minutes for 9/8/2010
 - show time periods that is being shown as well as previous time periods 
 - Change pop up box to dropdown box with external links to more details
 - Implement new name for webpage and get rid of MonoRanking (done, switched to /bananas) 
+
+Notes 2/18/2011
+- The page is currently broken because it will only run on Mono 2.10. There is no build for 2.10 on openSUSE 11.1. Our page building server is running openSUSE 11.1.
