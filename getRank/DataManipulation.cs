@@ -118,7 +118,7 @@ namespace getRank
 		/// </summary>
 		private void GetMailingListData(DateTime start_date)
 		{
-			string listLocation = homePath + "/monolists";
+			string listLocation = homePath + "/mail/.inboxes/monolists";
 			StreamReader read = File.OpenText(listLocation);
 
 			DateTime dtDate = new DateTime();
@@ -190,7 +190,7 @@ namespace getRank
 		/// </param>
 		private void GetBugzillaData(DateTime start_date)
 		{
-			string listLocation = homePath + "/bugzilla";
+			string listLocation = homePath + "/mail/.inboxes/bugzilla";
 			StreamReader read = File.OpenText(listLocation);
 			
 			List<Users> users = new List<Users>();
