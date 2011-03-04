@@ -12,7 +12,7 @@ using System.Net;
 using System.Threading;
 using System.Security.Cryptography;
 
-namespace getRank
+namespace Gravatarlib
 {
 	public class Gravatar
 	{

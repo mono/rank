@@ -33,18 +33,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="Mono.Data.Sqlite" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DataManipulation.cs" />
     <Compile Include="HtmlOut.cs" />
-    <Compile Include="Gravatar.cs" />
-    <Compile Include="Database.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Rankdblib\Rankdblib.csproj">
+      <Project>{8F7A20B2-46B3-4CA5-8A4A-4F7BB0338522}</Project>
+      <Name>Rankdblib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gravatarlib\Gravatarlib.csproj">
+      <Project>{D5B669C5-E854-4C66-8D5F-3BB97C167D30}</Project>
+      <Name>Gravatarlib</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using Mono.Data.Sqlite;
 using System.Data;
 
-namespace getRank
+namespace Rankdblib
 {
 	public class Database
 	{	
@@ -37,7 +37,7 @@ namespace getRank
 			db.Close();
 		}
 		
-		internal List<Users> RetrieveUsers()
+		public List<Users> RetrieveUsers()
 		{
 			List<Users> users = new List<Users>();
 			Users user;
@@ -84,7 +84,7 @@ namespace getRank
 			return users;
 		}
 		
-		internal void Clear()
+		public void Clear()
 		{
 			SqliteCommand clearUser = db.CreateCommand();
 			clearUser.CommandText = "DELETE FROM User";
@@ -103,7 +103,7 @@ namespace getRank
 			clearData.ExecuteNonQuery();
 		}
 		
-		internal void AddUser(Users user)
+		public void AddUser(Users user)
 		{
 			SqliteCommand addUser = db.CreateCommand();
 			addUser.CommandText = "INSERT INTO User VALUES(\""
