@@ -312,7 +312,7 @@ namespace getRank
 			p.StartInfo.RedirectStandardOutput = true;
 			p.StartInfo.WorkingDirectory = directory;
 			p.StartInfo.FileName = "git";
-			p.StartInfo.Arguments = @"log --no-merges --cherry-pick --shortstat --pretty=format:'%H;%an;%ce' --since=" + start.ToShortDateString();
+			p.StartInfo.Arguments = @"log --no-merges --cherry-pick --shortstat --pretty=format:'%H;%an;%ae' --since=" + start.ToShortDateString();
 			p.Start();
 			string data = p.StandardOutput.ReadToEnd();
 			ParseGitData(data, project);
