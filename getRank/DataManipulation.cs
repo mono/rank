@@ -61,32 +61,31 @@ namespace getRank
 			List<Users> badUsers = new List<Users>();
 			foreach (Users user in users)
 			{
-//				if (user.email.Count > 1 && user.email.Contains("miguel@gnome.org") && !user.Name.ToLower().Contains("miguel"))
-//				{
-//					user.email.Remove("miguel@gnome.org");
-//				}
-				
 				//Remove e-mails that weren't parsed correctly
 				List<string> badEmails = new List<string>();
-				
-//				if (user.email.Count > 1)
-//				{
-//					foreach (string email in user.email)
-//					{
-//						foreach (Users user in users)
-//						{
-//							
-//						}
-//					}
-//				}
-				
 
 				foreach (string email in user.email)
 				{
 					if (!emailMatch.IsMatch(email))
 					{
 						badEmails.Add(email);
+					} else if (user.email.Count > 1 && user.email.Contains("lluis") && !user.Name.ToLower().Contains("lluis"))
+					{
+						badEmails.Add(email);
+					} else if (user.email.Count > 1 && user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
+					{
+						badEmails.Add(email);
+					} else if (user.email.Count > 1 && user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !user.Name.ToLower().Contains("levi"))
+					{
+						badEmails.Add(email);
+					} else if (user.email.Count > 1 && user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
+					{
+						badEmails.Add(email);
+					} else if (user.email.Count > 1 && user.email.Contains("levi@unity3d.com") && !user.Name.ToLower().Contains("levi"))
+					{
+						badEmails.Add(email);
 					}
+					
 				}
 				foreach (string email in badEmails)
 				{
