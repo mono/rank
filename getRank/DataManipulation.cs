@@ -365,20 +365,23 @@ namespace getRank
 
 			foreach (string line in sdata)
 			{
-				if (line.Contains("files changed") && newcommit)
+				if (line.Contains("files changed"))
 				{
-					string[] changes = line.Split(',');
-					int added = int.Parse(changes[1].Trim().Split(' ')[0]);
-					int removed = int.Parse(changes[2].Trim().Split(' ')[0]);
-					previousUser.CodeAdded(added, project);
-					previousUser.CodeRemoved(removed, project);
-					if (added > removed)
+					if (newcommit)
 					{
-						previousUser.CodeCurved(added - removed, project);
-					}
-					else if (removed > added)
-					{
-						previousUser.CodeCurved(removed - added, project);
+						string[] changes = line.Split(',');
+						int added = int.Parse(changes[1].Trim().Split(' ')[0]);
+						int removed = int.Parse(changes[2].Trim().Split(' ')[0]);
+						previousUser.CodeAdded(added, project);
+						previousUser.CodeRemoved(removed, project);
+						if (added > removed)
+						{
+							previousUser.CodeCurved(added - removed, project);
+						}
+						else if (removed > added)
+						{
+							previousUser.CodeCurved(removed - added, project);
+						}
 					}
 				}
 				else if (line.Trim() != "")
