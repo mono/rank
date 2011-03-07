@@ -69,7 +69,7 @@ namespace getRank
 					if (!emailMatch.IsMatch(email))
 					{
 						badEmails.Add(email);
-					} else if (user.email.Count > 1 && user.email.Contains("lluis") && !user.Name.ToLower().Contains("lluis"))
+					} else if (user.email.Count > 1 && user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
 					{
 						badEmails.Add(email);
 					} else if (user.email.Count > 1 && user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
