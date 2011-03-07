@@ -69,19 +69,24 @@ namespace getRank
 					if (!emailMatch.IsMatch(email))
 					{
 						badEmails.Add(email);
-					} else if (user.email.Count > 1 && user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
+					}
+					if (user.email.Count > 1 && user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
 					{
 						badEmails.Add(email);
-					} else if (user.email.Count > 1 && user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
+					}
+					if (user.email.Count > 1 && user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
 					{
 						badEmails.Add(email);
-					} else if (user.email.Count > 1 && user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !user.Name.ToLower().Contains("levi"))
+					}
+					if (user.email.Count > 1 && user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !user.Name.ToLower().Contains("levi"))
 					{
 						badEmails.Add(email);
-					} else if (user.email.Count > 1 && user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
+					}
+					if (user.email.Count > 1 && user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
 					{
 						badEmails.Add(email);
-					} else if (user.email.Count > 1 && user.email.Contains("levi@unity3d.com") && !user.Name.ToLower().Contains("levi"))
+					}
+					if (user.email.Count > 1 && user.email.Contains("levi@unity3d.com") && !user.Name.ToLower().Contains("levi"))
 					{
 						badEmails.Add(email);
 					}
