@@ -47,7 +47,7 @@ namespace Rankdblib
 				score = score * -1;
 			}
 			
-			score = ((score * CommitCount()) + (MailingListMessages * 5) + (BugsWorkedCount() * 15) + (BugsClosed * 20));
+			score = (score + (CommitCount() * 5) + (MailingListMessages * 5) + (BugsWorkedCount() * 15) + (BugsClosed * 20));
 			return score;
 		}
 		
