@@ -145,7 +145,7 @@ namespace Rankdblib
 				+ userid
 				+ ")";
 			addProject.ExecuteNonQuery();
-			int id = GetID("Project", "UserID=" + userid);
+			int id = GetID("Project", "UserID=" + userid + " AND ProjName=\"" + project.name + "\"");
 			AddData(project, id);
 		}
 		
