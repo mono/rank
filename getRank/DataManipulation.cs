@@ -61,13 +61,26 @@ namespace getRank
 			List<Users> badUsers = new List<Users>();
 			foreach (Users user in users)
 			{
-				if (user.email.Count > 1 && user.email.Contains("miguel@gnome.org") && !user.Name.ToLower().Contains("miguel"))
-				{
-					user.email.Remove("miguel@gnome.org");
-				}
+//				if (user.email.Count > 1 && user.email.Contains("miguel@gnome.org") && !user.Name.ToLower().Contains("miguel"))
+//				{
+//					user.email.Remove("miguel@gnome.org");
+//				}
 				
 				//Remove e-mails that weren't parsed correctly
 				List<string> badEmails = new List<string>();
+				
+//				if (user.email.Count > 1)
+//				{
+//					foreach (string email in user.email)
+//					{
+//						foreach (Users user in users)
+//						{
+//							
+//						}
+//					}
+//				}
+				
+
 				foreach (string email in user.email)
 				{
 					if (!emailMatch.IsMatch(email))
@@ -163,7 +176,7 @@ namespace getRank
 							name = UserName(email, name);
 							if (!UserExists(email, name))
 							{
-								user = new Users(email, name, false);
+								user = new Users(email, name);
 								users.Add(user);
 							}
 							else
@@ -348,10 +361,11 @@ namespace getRank
 			chars[1] = '\n';
 			string[] sdata = data.Split(chars);
 			Users previousUser = new Users();
+			bool newcommit = false;
 
 			foreach (string line in sdata)
 			{
-				if (line.Contains("files changed"))
+				if (line.Contains("files changed") && newcommit)
 				{
 					string[] changes = line.Split(',');
 					int added = int.Parse(changes[1].Trim().Split(' ')[0]);
@@ -372,14 +386,14 @@ namespace getRank
 					string[] user = line.Split(';');
 					if (UserExists(user[2], user[1]))
 					{
-						GetUser(user[2]).AddCommit(user[0], project);
 						previousUser = GetUser(user[2]);
+						newcommit = previousUser.AddCommit(user[0], project);
 					}
 					else
 					{
-						Users aUser = new Users(user[2], user[1], false);
+						Users aUser = new Users(user[2], user[1]);
 						users.Add(aUser);
-						aUser.AddCommit(user[0], project);
+						newcommit = aUser.AddCommit(user[0], project);
 						previousUser = aUser;
 					}
 				}

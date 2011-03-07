@@ -27,7 +27,7 @@ namespace Rankdblib
 		/// <param name="inName">
 		/// User's name <see cref="System.String"/>
 		/// </param>
-		public Users(string inEmail, string inName, bool present)
+		public Users(string inEmail, string inName)
 		{
 			MailingListMessages = 0;
 			BugsClosed = 0;
@@ -70,9 +70,9 @@ namespace Rankdblib
 		/// <param name="commit">
 		/// Commit ID <see cref="System.String"/>
 		/// </param>
-		public void AddCommit(string commit, string project)
+		public bool AddCommit(string commit, string project)
 		{
-			GetProject(project).AddCommit(commit);
+			return GetProject(project).AddCommit(commit);
 		}
 		
 		public void CodeCurved(int value, string project)
@@ -258,9 +258,17 @@ namespace Rankdblib
 		/// <param name="commit">
 		/// Commit ID <see cref="System.String"/>
 		/// </param>
-		public void AddCommit(string commit)
+		public bool AddCommit(string commit)
 		{
-			commits.Add(commit);
+			if (!commits.Contains(commit))
+			{
+				commits.Add(commit);
+			}
+			else
+			{
+				return false;
+			}
+			return true;
 		}
 		
 		/// <summary>
