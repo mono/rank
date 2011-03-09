@@ -63,34 +63,32 @@ namespace getRank
 			{
 				//Remove e-mails that weren't parsed correctly
 				List<string> badEmails = new List<string>();
-				if (user.email.Count > 1)
+
+				foreach (string email in user.email)
 				{
-					foreach (string email in user.email)
+					if (!emailMatch.IsMatch(email))
 					{
-						if (!emailMatch.IsMatch(email))
-						{
-							badEmails.Add(email);
-						}
-						if (user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
-						{
-							badEmails.Add(email);
-						}
-						if (user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
-						{
-							badEmails.Add(email);
-						}
-						if (user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !user.Name.ToLower().Contains("levi"))
-						{
-							badEmails.Add(email);
-						}
-						if (user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
-						{
-							badEmails.Add(email);
-						}
-						if (user.email.Contains("levi@unity3d.com") && !user.Name.ToLower().Contains("levi"))
-						{
-							badEmails.Add(email);
-						}
+						badEmails.Add(email);
+					}
+					if (user.email.Count > 1 && user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
+					{
+						badEmails.Add(email);
+					}
+					if (user.email.Count > 1 && user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
+					{
+						badEmails.Add(email);
+					}
+					if (user.email.Count > 1 && user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !(user.Name.ToLower().Contains("levi") || user.Name.ToLower().Contains("tak")))
+					{
+						badEmails.Add(email);
+					}
+					if (user.email.Count > 1 && user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
+					{
+						badEmails.Add(email);
+					}
+					if (user.email.Count > 1 && user.email.Contains("levi@unity3d.com") && !(user.Name.ToLower().Contains("levi") || user.Name.ToLower().Contains("tak")))
+					{
+						badEmails.Add(email);
 					}
 				}
 				
@@ -116,6 +114,44 @@ namespace getRank
 			{
 				users.Remove(user);
 			}
+		}
+		
+		private void MergeDuplicateUsers()
+		{
+			Stack<Users> duplicates = new Stack<Users>();
+			foreach (Users user in users)
+			{
+				foreach (Users otheruser in users)
+				{
+					foreach (string otheremail in otheruser.email)
+					{
+						if (user.email.Contains(otheremail))
+						{
+							duplicates.Push(user);
+							duplicates.Push(otheruser);
+						}
+					}
+				}
+			}
+			
+			while (duplicates.Count > 0)
+			{
+				Users first = duplicates.Pop();
+				Users second = duplicates.Pop();
+				MergeUsers(first, second);
+			}
+		}
+		
+		private void MergeUsers(Users first, Users second)
+		{
+			if (second.Name.Split(' ').Length > 1)
+			{
+				first.Name = second.Name;
+			}
+			
+			first.BugsClosed += second.BugsClosed;
+			first.MailingListMessages += second.MailingListMessages;
+			//Merge projects here...
 		}
 		
 		private DateTime GetStartDate(string start_date)
