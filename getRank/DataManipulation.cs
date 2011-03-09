@@ -63,35 +63,37 @@ namespace getRank
 			{
 				//Remove e-mails that weren't parsed correctly
 				List<string> badEmails = new List<string>();
-
-				foreach (string email in user.email)
+				if (user.email.Count > 1)
 				{
-					if (!emailMatch.IsMatch(email))
+					foreach (string email in user.email)
 					{
-						badEmails.Add(email);
+						if (!emailMatch.IsMatch(email))
+						{
+							badEmails.Add(email);
+						}
+						if (user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
+						{
+							badEmails.Add(email);
+						}
+						if (user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
+						{
+							badEmails.Add(email);
+						}
+						if (user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !user.Name.ToLower().Contains("levi"))
+						{
+							badEmails.Add(email);
+						}
+						if (user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
+						{
+							badEmails.Add(email);
+						}
+						if (user.email.Contains("levi@unity3d.com") && !user.Name.ToLower().Contains("levi"))
+						{
+							badEmails.Add(email);
+						}
 					}
-					if (user.email.Count > 1 && user.email.Contains("slluis.devel@gmail.com") && !user.Name.ToLower().Contains("lluis"))
-					{
-						badEmails.Add(email);
-					}
-					if (user.email.Count > 1 && user.email.Contains("vargaz@gmail.com") && !user.Name.ToLower().Contains("varga"))
-					{
-						badEmails.Add(email);
-					}
-					if (user.email.Count > 1 && user.email.Contains("taktaktaktaktaktaktaktaktaktak@gmail.com") && !user.Name.ToLower().Contains("levi"))
-					{
-						badEmails.Add(email);
-					}
-					if (user.email.Count > 1 && user.email.Contains("sebastien@ximian.com") && !user.Name.ToLower().Contains("sebastien"))
-					{
-						badEmails.Add(email);
-					}
-					if (user.email.Count > 1 && user.email.Contains("levi@unity3d.com") && !user.Name.ToLower().Contains("levi"))
-					{
-						badEmails.Add(email);
-					}
-					
 				}
+				
 				foreach (string email in badEmails)
 				{
 					user.email.Remove(email);
