@@ -32,6 +32,7 @@ namespace getRank
 			GetMailingListData(start);
 			GetBugzillaData(start);
 			RemoveJunk();
+			//MergeDuplicates(); //Doesn't work right yet. I need to implement a seperate class for commits.
 			WriteDatabaseData();
 		}
 		
@@ -116,7 +117,7 @@ namespace getRank
 			}
 		}
 		
-		private void MergeDuplicateUsers()
+		private void MergeDuplicates()
 		{
 			Stack<Users> duplicates = new Stack<Users>();
 			foreach (Users user in users)
@@ -125,7 +126,7 @@ namespace getRank
 				{
 					foreach (string otheremail in otheruser.email)
 					{
-						if (user.email.Contains(otheremail))
+						if (user.email.Contains(otheremail) && otheruser != user && !duplicates.Contains(user))
 						{
 							duplicates.Push(user);
 							duplicates.Push(otheruser);
@@ -151,7 +152,38 @@ namespace getRank
 			
 			first.BugsClosed += second.BugsClosed;
 			first.MailingListMessages += second.MailingListMessages;
-			//Merge projects here...
+			
+			foreach (Projects secondproject in second.projects)
+			{
+				bool found = false;
+				foreach (Projects firstproject in first.projects)
+				{
+					if (firstproject.name == secondproject.name)
+					{
+						found = true;
+						firstproject.CodeAdded += secondproject.CodeAdded;
+						firstproject.CodeCurved += secondproject.CodeCurved;
+						firstproject.CodeRemoved += secondproject.CodeRemoved;
+						foreach (string commit in secondproject.commits)
+						{
+							firstproject.commits.Add(commit);
+						}
+					}
+				}
+				if (!found)
+				{
+					Projects project = new Projects(secondproject.name);
+					first.projects.Add(project);
+					project.CodeAdded = secondproject.CodeAdded;
+					project.CodeCurved = secondproject.CodeCurved;
+					project.CodeRemoved = secondproject.CodeRemoved;
+					foreach (string commit in secondproject.commits)
+					{
+						project.commits.Add(commit);
+					}
+				}
+			}
+			users.Remove(second);
 		}
 		
 		private DateTime GetStartDate(string start_date)
