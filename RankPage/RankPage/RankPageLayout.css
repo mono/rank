@@ -1,0 +1,20 @@
+﻿body {
+}
+
+#rightcolumn
+{
+    float:left;
+    width:50%;
+    
+}
+
+#leftcolumn
+{
+    float: left;
+    width:50%;
+}
+
+.oneaway
+{
+    opacity: 0.6;
+}
