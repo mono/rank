@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head runat="server">
     
     <title>Bananas - Mono</title>
@@ -70,6 +70,26 @@
  
  
 <div id="page"> 
+
+    <p><fb:login-button autologoutlink="true"></fb:login-button></p>
+    <p><fb:like></fb:like></p>
+
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({appId: '147572651971955', status: true, cookie: true,
+                 xfbml: true});
+      };
+      (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+
     <div id="content-header"><h2><!--BEGIN PAGE TITLE-->The Voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
     <div id="wrapper" class="wide"> 
  
