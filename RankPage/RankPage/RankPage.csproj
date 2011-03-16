@@ -63,5 +63,10 @@
     <Compile Include="RankingPage.aspx.cs">
       <DependentUpon>RankingPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\User_Data.cs" />
+    <Compile Include="App_Code\Global.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
   </ItemGroup>
 </Project>

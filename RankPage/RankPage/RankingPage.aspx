@@ -16,22 +16,22 @@
                 <td>Carsten Schlote</td>
                 <td>511071</td>
             </tr>
-
             <tr style="opacity:0.5">
                 <td><img src="http://www.gravatar.com/avatar/146ab0e304cf866e1a1dd9f4f9a8128d?d=identicon&s=50&r=g" id="avatarimg2"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
                 <td>Mike Krüger</td>
                 <td>490852</td>
             </tr>
+            <!-- Current User -->
             <tr>
-                <td><img src="http://www.gravatar.com/avatar/68420e7236f19e744eae2f66547223a6?d=identicon&s=50&r=g" id="avatarimg3"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
-                <td>Lluis Sanchez Gual</td>
-                <td>217404</td>
+            	<td><asp:Image id="currentUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
+                <td><asp:Label id="currentUserName" runat="server"></asp:Label></td>
+                <td><asp:Label id="currentUserScore" runat="server"></asp:Label></td>
             </tr>
+            <!-- End Current User -->
             <tr style="opacity:0.5">
                 <td><img src="http://www.gravatar.com/avatar/9bbe9342b19d5815d5b8e78154287c06?d=identicon&s=50&r=g" id="avatarimg4"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
                 <td>Marek Safar</td>
                 <td>145479</td>
-
             </tr>
             <tr style="opacity:0.25">
                 <td><img src="http://www.gravatar.com/avatar/c72e3d0e20153a42eed12b75f8a91016?d=identicon&s=50&r=g" id="avatarimg5"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>

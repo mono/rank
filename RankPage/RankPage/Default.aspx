@@ -7,6 +7,5 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" Runat="Server">
 <!-- Everything we want to see in the page needs to go here -->
-
-   
+<p>Somebody did something that we see here.</p>   
 </asp:Content>

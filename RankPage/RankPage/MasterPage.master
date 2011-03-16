@@ -30,7 +30,13 @@
         _uacct = "UA-76510-1";
         urchinTracker();
     </script> 
-    
+    <script type="text/javascript">
+		function PostEmail(email)
+		{
+			document.form1.email.value = email;
+            document.form1.submit();
+		}
+    </script> 
   </head> 
     
     
@@ -38,7 +44,8 @@
 
 <body>
     <form id="form1" runat="server">
-        
+    <input type="hidden" name="email" value="blahfake@gmail.com">
+    <asp:Button runat="server" id="myStatsbtn" Text="My Stats" OnClick="Retrieve_Email"></asp:Button>
         <div id="header"> 
 		<div class="wrapper"> 
 	    <h1>Mono</h1>    
@@ -70,8 +77,8 @@
  
  
 <div id="page"> 
-
-    <p><fb:login-button autologoutlink="true"></fb:login-button></p>
+	
+    <p><fb:login-button autologoutlink="true" perms="email"></fb:login-button></p>
     <p><fb:like></fb:like></p>
 
     <div id="fb-root"></div>
@@ -88,6 +95,8 @@
         e.async = true;
         document.getElementById('fb-root').appendChild(e);
       }());
+      
+	  FB.api('/me', function(response) {PostEmail(response.email);});
     </script>
 
     <div id="content-header"><h2><!--BEGIN PAGE TITLE-->The Voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
