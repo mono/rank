@@ -10,8 +10,8 @@ public partial class RankingPage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-//		Global.Name = "Fred Flinstone";
-//		currentUserName.Text = Global.Name;
+		//Global.Name = "Fred Flinstone";
+		//currentUserName.Text = Global.Name;
     }
     protected void btnShowHow_Click(object sender, EventArgs e)
     {

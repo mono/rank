@@ -31,11 +31,19 @@
         urchinTracker();
     </script> 
     <script type="text/javascript">
-		function PostEmail(email)
-		{
-			document.form1.email.value = email;
-            document.form1.submit();
-		}
+    	function GetEmail()
+    	{
+    		if (document.getElementById('email').value == "")
+    		{
+	    		FB.api('/me', function(response)
+	    		{
+	    			document.getElementById('email').value = response.email;
+	    			alert(response.email);
+	    		});
+			}
+    	}
+		
+		window.onload=GetEmail;
     </script> 
   </head> 
     
@@ -44,8 +52,7 @@
 
 <body>
     <form id="form1" runat="server">
-    <input type="hidden" name="email" value="blahfake@gmail.com">
-    <asp:Button runat="server" id="myStatsbtn" Text="My Stats" OnClick="Retrieve_Email"></asp:Button>
+    <input type="hidden" id="email">
         <div id="header"> 
 		<div class="wrapper"> 
 	    <h1>Mono</h1>    
@@ -81,23 +88,19 @@
     <p><fb:login-button autologoutlink="true" perms="email"></fb:login-button></p>
     <p><fb:like></fb:like></p>
 
-    <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({appId: '147572651971955', status: true, cookie: true,
-                 xfbml: true});
-      };
-      (function() {
-        var e = document.createElement('script');
-        e.type = 'text/javascript';
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
-        e.async = true;
-        document.getElementById('fb-root').appendChild(e);
-      }());
-      
-	  FB.api('/me', function(response) {PostEmail(response.email);});
-    </script>
+	<div id="fb-root"></div>
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({appId: 'your app id', status: true, cookie: true,
+	             xfbml: true});
+	  };
+	  (function() {
+	    var e = document.createElement('script'); e.async = true;
+	    e.src = document.location.protocol +
+	      '//connect.facebook.net/en_US/all.js';
+	    document.getElementById('fb-root').appendChild(e);
+	  }());
+	</script>
 
     <div id="content-header"><h2><!--BEGIN PAGE TITLE-->The Voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
     <div id="wrapper" class="wide"> 
