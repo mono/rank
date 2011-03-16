@@ -33,14 +33,11 @@
     <script type="text/javascript">
     	function GetEmail()
     	{
-    		if (document.getElementById('email').value == "")
+    		FB.api('/me', function(response)
     		{
-	    		FB.api('/me', function(response)
-	    		{
-	    			document.getElementById('email').value = response.email;
-	    			alert(response.email);
-	    		});
-			}
+    			document.getElementById('email').value = response.email;
+    			document.getElementById('name').value = response.name;
+    		});
     	}
 		
 		window.onload=GetEmail;
@@ -52,7 +49,8 @@
 
 <body>
     <form id="form1" runat="server">
-    <input type="hidden" id="email">
+    <input type="hidden" id="email" />
+    <input type="hidden" id="name" />
         <div id="header"> 
 		<div class="wrapper"> 
 	    <h1>Mono</h1>    
@@ -86,7 +84,6 @@
 <div id="page"> 
 	
     <p><fb:login-button autologoutlink="true" perms="email"></fb:login-button></p>
-    <p><fb:like></fb:like></p>
 
 	<div id="fb-root"></div>
 	<script>
@@ -119,7 +116,7 @@
        <asp:ContentPlaceHolder  id="Body" runat="server">
         </asp:ContentPlaceHolder>
 
-
+</div></div></div>
     <!--END Main Content -->   
 <div id="footer-hr"></div> 
 <div id="footer"> 

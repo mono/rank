@@ -1,19 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RankPage/RankingPage.aspx">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RankPage/MasterPage.master">
     <Files>
-      <File FileName="RankPage/Default.aspx.cs" Line="12" Column="1" />
+      <File FileName="RankPage/Default.aspx.cs" Line="8" Column="1" />
       <File FileName="RankPage/Default.aspx" Line="10" Column="44" />
       <File FileName="RankPage/MasterPage.master.cs" Line="7" Column="1" />
-      <File FileName="RankPage/MasterPage.master" Line="47" Column="66" />
-      <File FileName="RankPage/App_Code/User_Data.cs" Line="1" Column="1" />
-      <File FileName="RankPage/App_Code/Global.cs" Line="9" Column="32" />
-      <File FileName="RankPage/RankingPage.aspx" Line="6" Column="22" />
-      <File FileName="RankPage/RankingPage.aspx.cs" Line="13" Column="1" />
+      <File FileName="RankPage/MasterPage.master" Line="57" Column="25" />
+      <File FileName="RankPage/RankingPage.aspx" Line="27" Column="51" />
+      <File FileName="RankPage/App_Data/Global.cs" Line="8" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/home/dmulder/code/rank/RankPage/RankPage/RankingPage.aspx.cs" line="17" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

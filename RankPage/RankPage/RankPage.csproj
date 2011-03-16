@@ -64,6 +64,15 @@
       <DependentUpon>RankingPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Global.cs" />
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RankingPage.aspx.designer.cs">
+      <DependentUpon>RankingPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage.master.designer.cs">
+      <DependentUpon>MasterPage.master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

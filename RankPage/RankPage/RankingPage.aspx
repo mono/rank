@@ -23,9 +23,9 @@
             </tr>
             <!-- Current User -->
             <tr>
-            	<td><asp:Image id="currentUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
-                <td><asp:Label id="currentUserName" runat="server"></asp:Label></td>
-                <td><asp:Label id="currentUserScore" runat="server"></asp:Label></td>
+				<td><asp:Image id="currentUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
+				<td><asp:Label id="currentUserName" runat="server"></asp:Label></td>
+				<td><asp:Label id="currentUserScore" runat="server"></asp:Label></td>
             </tr>
             <!-- End Current User -->
             <tr style="opacity:0.5">
