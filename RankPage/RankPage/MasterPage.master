@@ -33,15 +33,15 @@
     <script type="text/javascript">
     	function GetEmail()
     	{
-    		if (document.getElementById('email').value == "")
-    		{
-	    		FB.api('/me', function(response)
-	    		{
-	    			document.getElementById('email').value = response.email;
-				document.getElementById('name').value = response.name;
-	    			alert(response.email);
-	    		});
-			}
+    	    FB.api('/me', function(response) {
+    	        document.getElementById('email').value = response.email;
+    	        document.getElementById('name').value = response.name;
+    	        alert(response.email);
+    	        if (response.email != "") {
+    	            document.forms["userform"].submit();
+    	        }
+
+    	    });
     	}
 
 		window.onload=GetEmail;
@@ -52,9 +52,11 @@
    
 
 <body>
+    <form id="userform" method="post" action="RankingPage.aspx">
+        <input type="hidden" id="email" />
+        <input type="hidden" id="name" />
+    </form>
     <form id="form1" runat="server">
-    <input type="hidden" id="email" />
-    <input type="hidden" id="name" />
         <div id="header"> 
 		<div class="wrapper"> 
 	    <h1>Mono</h1>    
@@ -83,7 +85,9 @@
       </div><!--#search--> 
     </div><!--.wrapper--> 
   </div><!--#header--> 
-
+</form>
+ 
+ 
  
 <div id="page"> 
 
@@ -120,7 +124,7 @@
        <asp:ContentPlaceHolder  id="Body" runat="server">
         </asp:ContentPlaceHolder>
 
-
+</div></div></div>
     <!--END Main Content -->   
 <div id="footer-hr"></div> 
 <div id="footer"> 
@@ -190,7 +194,7 @@
              
 </div> 
      
-    </form>
+
 </body>
 
 </html>
