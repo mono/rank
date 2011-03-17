@@ -63,7 +63,6 @@
     <Compile Include="RankingPage.aspx.cs">
       <DependentUpon>RankingPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\Global.cs" />
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -75,6 +74,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <ProjectReference Include="..\Global\Global.csproj">
+      <Project>{68C82564-0CD9-4E28-BCCC-84FC31D2EF22}</Project>
+      <Name>Global</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
