@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+﻿﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -33,13 +33,17 @@
     <script type="text/javascript">
     	function GetEmail()
     	{
-    		FB.api('/me', function(response)
+    		if (document.getElementById('email').value == "")
     		{
-    			document.getElementById('email').value = response.email;
-    			document.getElementById('name').value = response.name;
-    		});
+	    		FB.api('/me', function(response)
+	    		{
+	    			document.getElementById('email').value = response.email;
+				document.getElementById('name').value = response.name;
+	    			alert(response.email);
+	    		});
+			}
     	}
-		
+
 		window.onload=GetEmail;
     </script> 
   </head> 
@@ -79,10 +83,10 @@
       </div><!--#search--> 
     </div><!--.wrapper--> 
   </div><!--#header--> 
- 
+
  
 <div id="page"> 
-	
+
     <p><fb:login-button autologoutlink="true" perms="email"></fb:login-button></p>
 
 	<div id="fb-root"></div>
@@ -116,7 +120,7 @@
        <asp:ContentPlaceHolder  id="Body" runat="server">
         </asp:ContentPlaceHolder>
 
-</div></div></div>
+
     <!--END Main Content -->   
 <div id="footer-hr"></div> 
 <div id="footer"> 

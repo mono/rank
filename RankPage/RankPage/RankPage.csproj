@@ -72,11 +72,9 @@
     <Compile Include="MasterPage.master.designer.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Global\Global.csproj">
-      <Project>{68C82564-0CD9-4E28-BCCC-84FC31D2EF22}</Project>
-      <Name>Global</Name>
-    </ProjectReference>
+    <Folder Include="App_Code\" />
   </ItemGroup>
 </Project>
