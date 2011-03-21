@@ -36,14 +36,13 @@
     	    FB.api('/me', function(response) {
     	        document.getElementById('email').value = response.email;
     	        document.getElementById('name').value = response.name;
-    	        //if (response.email != null) {
-    	        //    document.forms["userform"].submit();
-    	        //}
-
+    	        if (response.email != null) {
+    	            document.forms["rank"].submit();
+    	        }
     	    });
     	}
 
-		//window.onload=GetEmail;
+		window.onload=GetEmail;
     </script> 
   </head> 
     
@@ -96,7 +95,7 @@
 	             xfbml: true});
 		FB.Event.subscribe('auth.login', function(response) {     
 				GetEmail();
-        	   	document.forms["rank"].submit(); 
+        	   	//document.forms["rank"].submit(); 
     	});
 		FB.Event.subscribe('auth.logout', function(response) {        
         	   	document.forms["default"].submit(); 
