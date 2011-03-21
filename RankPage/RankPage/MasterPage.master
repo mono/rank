@@ -78,7 +78,7 @@
 	<div id="fb-root"></div>
 	<script>
 	  window.fbAsyncInit = function() {
-	    FB.init({appId: '200500963301473', status: true, cookie: true,
+	    FB.init({appId: '200500963301473u', status: true, cookie: true,
 	             xfbml: true});
 	  };
 	  (function() {
@@ -86,8 +86,18 @@
 	    e.src = document.location.protocol +
 	      '//connect.facebook.net/en_US/all.js';
 	    document.getElementById('fb-root').appendChild(e);
+	    
+	  FB.getLoginStatus(function(response) {
+	  if (response.session) {
+		document.forms["default"].submit();
+	  }
+	  });
+	    
 	  }());
+
 	</script>
+	
+	<form id="default" method="post" action="Default.aspx"></form>
 
     <div id="content-header"><h2><!--BEGIN PAGE TITLE-->The Voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
     <div id="wrapper" class="wide"> 
