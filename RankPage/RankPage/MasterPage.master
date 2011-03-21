@@ -41,8 +41,6 @@
     	        }
     	    });
     	}
-
-		window.onload=GetEmail;
     </script> 
   </head> 
     

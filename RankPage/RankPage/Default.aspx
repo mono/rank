@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Default2" %>
 
 <asp:Content ID="Head" ContentPlaceHolderID="Head" Runat="Server">
-
+<script>
+window.onload=GetEmail;
+</script>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" Runat="Server">
