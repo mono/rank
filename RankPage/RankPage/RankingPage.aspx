@@ -48,7 +48,7 @@
 <div id="rightcolumn">
 <h2>Details for leveling up?</h2>
 <p>Some information is going to go in here</p>
-<form>
+<form runat="server">
     <asp:Button ID="btnShowHow" runat="server" Text="Show me how" 
         onclick="btnShowHow_Click" />
 </form>
