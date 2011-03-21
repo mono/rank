@@ -15,6 +15,7 @@ public partial class RankingPage : System.Web.UI.Page
         //Page.PreviousPage.Request
         //string name = Master.FindControl("name").ToString();
         user = new UserInfo(Request.Form["name"], Request.Form["email"]);
+		currentUserName.Text = user.Name;
     }
 	
     protected void btnShowHow_Click(object sender, EventArgs e)
