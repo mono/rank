@@ -86,15 +86,12 @@
 	    e.src = document.location.protocol +
 	      '//connect.facebook.net/en_US/all.js';
 	    document.getElementById('fb-root').appendChild(e);
-	    
+	  }());
 	  FB.getLoginStatus(function(response) {
 	  if (response.session) {
 		document.forms["default"].submit();
 	  }
 	  });
-	    
-	  }());
-
 	</script>
 	
 	<form id="default" method="post" action="Default.aspx"></form>
