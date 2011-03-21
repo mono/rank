@@ -30,32 +30,14 @@
         _uacct = "UA-76510-1";
         urchinTracker();
     </script> 
-    <script type="text/javascript">
-    	function GetEmail()
-    	{
-    	    FB.api('/me', function(response) {
-    	        document.getElementById('email').value = response.email;
-    	        document.getElementById('name').value = response.name;
-    	        alert(response.email);
-    	        if (response.email != "") {
-    	            document.forms["userform"].submit();
-    	        }
 
-    	    });
-    	}
-
-		window.onload=GetEmail;
-    </script> 
   </head> 
     
     
    
 
 <body>
-    <form id="userform" method="post" action="RankingPage.aspx">
-        <input type="hidden" id="email" />
-        <input type="hidden" id="name" />
-    </form>
+
     <form id="form1" runat="server">
         <div id="header"> 
 		<div class="wrapper"> 
