@@ -30,6 +30,21 @@
         _uacct = "UA-76510-1";
         urchinTracker();
     </script> 
+    <script type="text/javascript">
+    	function GetEmail()
+    	{
+    	    FB.api('/me', function(response) {
+    	        document.getElementById('email').value = response.email;
+    	        document.getElementById('name').value = response.name;
+    	        //if (response.email != null) {
+    	        //    document.forms["userform"].submit();
+    	        //}
+
+    	    });
+    	}
+
+		//window.onload=GetEmail;
+    </script> 
   </head> 
     
     
@@ -79,11 +94,12 @@
 	  window.fbAsyncInit = function() {
 	    FB.init({appId: '200500963301473', status: true, cookie: true,
 	             xfbml: true});
-		FB.Event.subscribe('auth.login', function(response) {        
-        	   document.forms["default"].submit(); 
+		FB.Event.subscribe('auth.login', function(response) {     
+				GetEmail();
+        	   	document.forms["rank"].submit(); 
     	});
 		FB.Event.subscribe('auth.logout', function(response) {        
-        	   document.forms["default"].submit(); 
+        	   	document.forms["default"].submit(); 
     	});
 	  };
 	  (function() {
@@ -96,6 +112,10 @@
 	</script>
 	
 	<form id="default" method="post" action="Default.aspx"></form>
+    <form id="rank" method="post" action="RankingPage.aspx">
+        <input type="hidden" id="email" />
+        <input type="hidden" id="name" />
+    </form>
 
     <div id="content-header"><h2><!--BEGIN PAGE TITLE-->The Voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
     <div id="wrapper" class="wide"> 

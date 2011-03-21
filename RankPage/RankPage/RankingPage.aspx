@@ -1,23 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="RankingPage.aspx.cs" Inherits="RankingPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" Runat="Server">
-    <script type="text/javascript">
-    	function LoggedOut()
-    	{
-    	    FB.api('/me', function(response) {
-    	        if (response.email == null) {
-    	            document.forms["loggedout"].submit();
-    	        }
-    	    });
-    	}
 
-		window.onload=LoggedOut;
-    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" Runat="Server">
 
-<form id="loggedout" method="post" action="Default.aspx">
-</form>
+
 
 <div id="leftcolumn">
     <table>
