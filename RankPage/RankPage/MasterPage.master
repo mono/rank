@@ -30,7 +30,6 @@
         _uacct = "UA-76510-1";
         urchinTracker();
     </script> 
-
   </head> 
     
     
@@ -80,18 +79,18 @@
 	  window.fbAsyncInit = function() {
 	    FB.init({appId: '200500963301473', status: true, cookie: true,
 	             xfbml: true});
+		FB.Event.subscribe('auth.login', function(response) {        
+        	   document.forms["default"].submit(); 
+    	});
+		FB.Event.subscribe('auth.logout', function(response) {        
+        	   document.forms["default"].submit(); 
+    	});
 	  };
 	  (function() {
 	    var e = document.createElement('script'); e.async = true;
 	    e.src = document.location.protocol +
 	      '//connect.facebook.net/en_US/all.js';
 	    document.getElementById('fb-root').appendChild(e);
-	    
-	    FB.getLoginStatus(function(response) {
-		  if (response.session) {
-		    document.forms["default"].submit();
-		  }
-		});
 	  }());
 	  
 	</script>
