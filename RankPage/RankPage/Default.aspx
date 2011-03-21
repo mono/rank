@@ -8,7 +8,7 @@
     	        document.getElementById('email').value = response.email;
     	        document.getElementById('name').value = response.name;
     	        alert(response.email);
-    	        if (response.email != "undefined") {
+    	        if (response.email != null) {
     	            document.forms["userform"].submit();
     	        }
 
