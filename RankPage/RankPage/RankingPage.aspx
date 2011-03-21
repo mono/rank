@@ -5,7 +5,7 @@
     	function LoggedOut()
     	{
     	    FB.api('/me', function(response) {
-    	        if (response.email == "undefined") {
+    	        if (response.email == null) {
     	            document.forms["loggedout"].submit();
     	        }
     	    });
