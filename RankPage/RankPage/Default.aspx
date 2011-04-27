@@ -2,15 +2,12 @@
 
 <asp:Content ID="Head" ContentPlaceHolderID="Head" Runat="Server">
 <script>
-window.onload=GetEmail;
+
 </script>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Body" Runat="Server">
-    <!-- <form id="userform" method="post" action="RankingPage.aspx">
-        <input type="hidden" id="email" />
-        <input type="hidden" id="name" />
-    </form> -->
+
 <!-- Everything we want to see in the page needs to go here -->
 <p>Somebody did something that we see here.</p>   
 </asp:Content>

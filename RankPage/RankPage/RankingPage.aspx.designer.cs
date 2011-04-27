@@ -23,4 +23,10 @@ public partial class RankingPage {
 	protected System.Web.UI.WebControls.Label currentUserScore;
 	
 	protected System.Web.UI.WebControls.Button btnShowHow;
+	
+	public new MasterPage Master {
+		get {
+			return ((MasterPage)(base.Master));
+		}
+	}
 }

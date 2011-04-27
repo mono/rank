@@ -3,17 +3,42 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="RankPage/MasterPage.master">
     <Files>
       <File FileName="RankPage/Default.aspx.cs" Line="8" Column="1" />
-      <File FileName="RankPage/Default.aspx" Line="10" Column="44" />
-      <File FileName="RankPage/MasterPage.master.cs" Line="7" Column="1" />
-      <File FileName="RankPage/MasterPage.master" Line="57" Column="25" />
-      <File FileName="RankPage/RankingPage.aspx" Line="27" Column="51" />
-      <File FileName="RankPage/App_Data/Global.cs" Line="8" Column="1" />
+      <File FileName="RankPage/MasterPage.master" Line="43" Column="47" />
+      <File FileName="RankPage/Default.aspx" Line="5" Column="1" />
+      <File FileName="RankPage/MasterPage.master.cs" Line="13" Column="2" />
+      <File FileName="RankPage/RankingPage.aspx" Line="10" Column="1" />
+      <File FileName="RankPage/RankingPage.aspx.cs" Line="20" Column="48" />
+      <File FileName="RankPage/web.config" Line="21" Column="88" />
+      <File FileName="RankPage/RankPageLayout.css" Line="20" Column="2" />
+      <File FileName="RankPage/MonoRanking.css" Line="85" Column="1" />
+      <File FileName="RankPage/UserInfo.cs" Line="8" Column="2" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="RankPage" expanded="True">
+            <Node name="Default.aspx" expanded="True" />
+            <Node name="MasterPage.master" expanded="True" selected="True" />
+            <Node name="RankingPage.aspx" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>rowid</Value>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/home/dmulder/code/rank/RankPage/RankPage/RankingPage.aspx.cs" line="17" />
+      <Breakpoint file="/home/dmulder/code/rank/RankPage/RankPage/RankingPage.aspx.cs" line="21" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="RankPage/RankingPage.aspx.cs" line="21" offsetX="388" offsetY="320" expression="user" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>

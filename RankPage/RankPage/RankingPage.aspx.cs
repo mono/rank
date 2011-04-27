@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gravatarlib;
 
 public partial class RankingPage : System.Web.UI.Page
 {
@@ -10,12 +11,9 @@ public partial class RankingPage : System.Web.UI.Page
 	
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        //string name = Request.Form["userform"]["name"].Value.ToString();
-        //Page.PreviousPage.Request
-        //string name = Master.FindControl("name").ToString();
-        user = new UserInfo(Request.Form["name"], Request.Form["email"]);
-		currentUserName.Text = user.Name;
+		currentUserName.Text = (string)Session["name"];
+		Gravatar gravatar = new Gravatar((string)Session["email"], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
+		currentUserGravatar.ImageUrl = gravatar.GravatarURL();
     }
 	
     protected void btnShowHow_Click(object sender, EventArgs e)

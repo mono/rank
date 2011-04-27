@@ -8,7 +8,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-		
+        try
+        {
+            Session["name"] = Request.Form["name"].ToString();
+			Session["email"] = Request.Form["email"].ToString();
+        }
+        catch (Exception i) { };
     }
-
 }
