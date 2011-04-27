@@ -11,9 +11,13 @@ public partial class RankingPage : System.Web.UI.Page
 	
     protected void Page_Load(object sender, EventArgs e)
     {
-		currentUserName.Text = (string)Session["name"];
-		Gravatar gravatar = new Gravatar((string)Session["email"], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
-		currentUserGravatar.ImageUrl = gravatar.GravatarURL();
+		try
+		{
+			currentUserName.Text = (string)Session["name"];
+			Gravatar gravatar = new Gravatar((string)Session["email"], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
+			currentUserGravatar.ImageUrl = gravatar.GravatarURL();
+		}
+		catch (Exception i){};
     }
 	
     protected void btnShowHow_Click(object sender, EventArgs e)

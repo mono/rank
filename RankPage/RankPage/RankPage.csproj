@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Gravatarlib\bin\Release\Gravatarlib.dll</HintPath>
     </Reference>
+    <Reference Include="Rankdblib, Version=1.0.4083.21840, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Rankdblib\bin\Release\Rankdblib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
