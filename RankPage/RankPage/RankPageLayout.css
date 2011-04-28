@@ -1,11 +1,10 @@
-﻿body {
-}
+﻿/*body {
+}*/
 
 #rightcolumn
 {
-    float:left;
+	float: right;
     width:50%;
-    
 }
 
 #leftcolumn
@@ -14,7 +13,7 @@
     width:50%;
 }
 
-.oneaway
-{
-    opacity: 0.6;
+table {
+	padding: 5px;
 }
+  

@@ -1,25 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RankPage/MasterPage.master">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RankPage/RankingPage.aspx.cs">
     <Files>
-      <File FileName="RankPage/Default.aspx.cs" Line="8" Column="1" />
-      <File FileName="RankPage/MasterPage.master" Line="43" Column="47" />
-      <File FileName="RankPage/Default.aspx" Line="5" Column="1" />
-      <File FileName="RankPage/MasterPage.master.cs" Line="13" Column="2" />
-      <File FileName="RankPage/RankingPage.aspx" Line="10" Column="1" />
-      <File FileName="RankPage/RankingPage.aspx.cs" Line="20" Column="48" />
-      <File FileName="RankPage/web.config" Line="21" Column="88" />
-      <File FileName="RankPage/RankPageLayout.css" Line="20" Column="2" />
-      <File FileName="RankPage/MonoRanking.css" Line="85" Column="1" />
-      <File FileName="RankPage/UserInfo.cs" Line="8" Column="2" />
+      <File FileName="RankPage/MasterPage.master" Line="20" Column="1" />
+      <File FileName="RankPage/MasterPage.master.cs" Line="14" Column="42" />
+      <File FileName="RankPage/RankingPage.aspx.cs" Line="30" Column="80" />
+      <File FileName="RankPage/RankingPage.aspx" Line="36" Column="118" />
+      <File FileName="RankPage/RankPageLayout.css" Line="18" Column="2" />
+      <File FileName="RankPage/MonoRanking.css" Line="23" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="RankPage" expanded="True">
+            <Node name="References" expanded="True" />
             <Node name="Default.aspx" expanded="True" />
-            <Node name="MasterPage.master" expanded="True" selected="True" />
-            <Node name="RankingPage.aspx" expanded="True" />
+            <Node name="MasterPage.master" expanded="True" />
+            <Node name="RankingPage.aspx" expanded="True">
+              <Node name="RankingPage.aspx.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -34,11 +33,7 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/home/dmulder/code/rank/RankPage/RankPage/RankingPage.aspx.cs" line="21" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="RankPage/RankingPage.aspx.cs" line="21" offsetX="388" offsetY="320" expression="user" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

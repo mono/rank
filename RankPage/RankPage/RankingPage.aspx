@@ -3,60 +3,77 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" Runat="Server">
 
+<script>
+function MouseOver(tablerow)
+{
+	document.getElementById(tablerow).className = "over";
+}
+
+function MouseOut(tablerow)
+{
+	document.getElementById(tablerow).className = "out";
+}
+</script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" Runat="Server">
 
 
 
-<div id="leftcolumn">
-    <table>
+<div id="content" class="wide">
+    <table id="leftcolumn">
         <tbody>
             <tr>
                 <th>Gravatar</th>
                 <th>Name</th>
                 <th>Bananas</th>
             </tr>
-            <tr style="opacity:0.25">
-                <td><img src="http://www.gravatar.com/avatar/3a9106e0c085d9a856588c454894d66b?d=identicon&s=50&r=g" id="avatarimg1" style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
-                <td>Carsten Schlote</td>
-                <td>511071</td>
+            <tr style="opacity:0.25" id="twoAbove" onMouseOver="MouseOver('twoAbove');" onMouseOut="MouseOut('twoAbove')">
+				<td><asp:Image id="twoAboveUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
+				<td><asp:Label id="twoAboveUserName" runat="server"></asp:Label></td>
+				<td><asp:Label id="twoAboveUserScore" runat="server"></asp:Label></td>
             </tr>
-            <tr style="opacity:0.5">
-                <td><img src="http://www.gravatar.com/avatar/146ab0e304cf866e1a1dd9f4f9a8128d?d=identicon&s=50&r=g" id="avatarimg2"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
-                <td>Mike Krüger</td>
-                <td>490852</td>
+            <tr style="opacity:0.5" id="oneAbove" onMouseOver="MouseOver('oneAbove');" onMouseOut="MouseOut('oneAbove')">
+				<td><asp:Image id="oneAboveUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
+				<td><asp:Label id="oneAboveUserName" runat="server"></asp:Label></td>
+				<td><asp:Label id="oneAboveUserScore" runat="server"></asp:Label></td>
             </tr>
             <!-- Current User -->
-            <tr>
+            <tr style="opacity:1;" id="current" onMouseOver="MouseOver('current');" onMouseOut="MouseOut('current')">
 				<td><asp:Image id="currentUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
 				<td><asp:Label id="currentUserName" runat="server"></asp:Label></td>
 				<td><asp:Label id="currentUserScore" runat="server"></asp:Label></td>
             </tr>
             <!-- End Current User -->
-            <tr style="opacity:0.5">
-                <td><img src="http://www.gravatar.com/avatar/9bbe9342b19d5815d5b8e78154287c06?d=identicon&s=50&r=g" id="avatarimg4"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
-                <td>Marek Safar</td>
-                <td>145479</td>
+            <tr style="opacity:0.5" id="oneBelow" onMouseOver="MouseOver('oneBelow');" onMouseOut="MouseOut('oneBelow')">
+				<td><asp:Image id="oneBelowUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
+				<td><asp:Label id="oneBelowUserName" runat="server"></asp:Label></td>
+				<td><asp:Label id="oneBelowUserScore" runat="server"></asp:Label></td>
             </tr>
-            <tr style="opacity:0.25">
-                <td><img src="http://www.gravatar.com/avatar/c72e3d0e20153a42eed12b75f8a91016?d=identicon&s=50&r=g" id="avatarimg5"  style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" alt="Gravatar" /></td>
-                <td>Jeffrey Stedfast</td>
-                <td>82572</td>
+            <tr style="opacity:0.25" id="twoBelow" onMouseOver="MouseOver('twoBelow');" onMouseOut="MouseOut('twoBelow')">
+				<td><asp:Image id="twoBelowUserGravatar" runat="server" Style="margin-left:auto; margin-right:auto; display:block;width: 50px; height: 50px;" AlternateText="Gravatar"></asp:Image></td>
+				<td><asp:Label id="twoBelowUserName" runat="server"></asp:Label></td>
+				<td><asp:Label id="twoBelowUserScore" runat="server"></asp:Label></td>
             </tr>
-            
         
         
         </tbody>
     </table>
 
-</div>
-<div id="rightcolumn">
-<h2>Details for leveling up?</h2>
-<p>Some information is going to go in here</p>
-<form runat="server">
-    <asp:Button ID="btnShowHow" runat="server" Text="Show me how" 
-        onclick="btnShowHow_Click" />
-</form>
+
+
+    <table id="rightcolumn">
+        <tbody>
+            <tr>
+				<h2>Details for leveling up?</h2>
+				<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            </tr>
+        
+        
+        </tbody>
+    </table>
+
+
 </div>
 </asp:Content>
 

@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gravatarlib;
+using Rankdblib;
 
 public partial class RankingPage : System.Web.UI.Page
 {
@@ -11,17 +12,30 @@ public partial class RankingPage : System.Web.UI.Page
 	
     protected void Page_Load(object sender, EventArgs e)
     {
+		string name = "";
+		string email = "";
 		try
 		{
-			currentUserName.Text = (string)Session["name"];
-			Gravatar gravatar = new Gravatar((string)Session["email"], Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50);
-			currentUserGravatar.ImageUrl = gravatar.GravatarURL();
+			name = (string)Session["name"];
+			email = (string)Session["email"];
+
 		}
 		catch (Exception i){};
-    }
-	
-    protected void btnShowHow_Click(object sender, EventArgs e)
-    {
+		
+		currentUserName.Text = name;
+		currentUserGravatar.ImageUrl = new Gravatar(email, Gravatar.IconSets.identicon, Gravatar.Ratings.g, 50).GravatarURL();
+		
+		List<Users> users;
+		Database db = new Database();
+		users = db.RetrieveUsers(); //This needs to be stored in an html5 browser db.
 
+		foreach (Users user in users)
+		{
+			if (user.email.Contains(email))
+			{
+				currentUserScore.Text = user.Score().ToString();
+				Session["currentUser"] = user;
+			}
+		}
     }
 }

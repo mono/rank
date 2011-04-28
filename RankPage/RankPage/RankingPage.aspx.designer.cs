@@ -16,13 +16,35 @@ public partial class RankingPage {
 	
 	protected System.Web.UI.WebControls.Content Content2;
 	
+	protected System.Web.UI.WebControls.Image twoAboveUserGravatar;
+	
+	protected System.Web.UI.WebControls.Label twoAboveUserName;
+	
+	protected System.Web.UI.WebControls.Label twoAboveUserScore;
+	
+	protected System.Web.UI.WebControls.Image oneAboveUserGravatar;
+	
+	protected System.Web.UI.WebControls.Label oneAboveUserName;
+	
+	protected System.Web.UI.WebControls.Label oneAboveUserScore;
+	
 	protected System.Web.UI.WebControls.Image currentUserGravatar;
 	
 	protected System.Web.UI.WebControls.Label currentUserName;
 	
 	protected System.Web.UI.WebControls.Label currentUserScore;
 	
-	protected System.Web.UI.WebControls.Button btnShowHow;
+	protected System.Web.UI.WebControls.Image oneBelowUserGravatar;
+	
+	protected System.Web.UI.WebControls.Label oneBelowUserName;
+	
+	protected System.Web.UI.WebControls.Label oneBelowUserScore;
+	
+	protected System.Web.UI.WebControls.Image twoBelowUserGravatar;
+	
+	protected System.Web.UI.WebControls.Label twoBelowUserName;
+	
+	protected System.Web.UI.WebControls.Label twoBelowUserScore;
 	
 	public new MasterPage Master {
 		get {

@@ -110,21 +110,14 @@
 
 	    		<div id="content-header"><h2><!--BEGIN PAGE TITLE-->The Voices of the Mono Project<!--END PAGE TITLE--></h2></div> 
 	    		<div id="wrapper" class="wide"> 
-	    			<div id="sidebar"> 
-	    				<div id="toc-parent"></div> 
-	    				<!-- BEGIN SIDE CONTENT --> 
-	    
-	    
-	    				<!-- END SIDE CONTENT --> 
-	    			</div><!--#sidebar--> 
-	    			<div id="content" class="wide"> 
+	    			<!-- <div id="content" class="wide"> -->
 	    				<!-- BEGIN MAIN CONTENT --> 
 	        			<!-- Everything we want to see in the page needs to go here -->
 	
 	       				<asp:ContentPlaceHolder  id="Body" runat="server">
 	        			</asp:ContentPlaceHolder>
-	
-					</div><!--#content-->
+	        			
+					<!-- </div> --> <!--#content-->
 				</div><!--#wrapper-->
 		</div><!--#page-->
 	    <!--END Main Content -->   
